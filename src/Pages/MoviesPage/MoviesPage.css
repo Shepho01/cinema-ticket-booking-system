@@ -1,0 +1,16 @@
+.movies-page-title {
+
+    color: rgb(75, 175, 234);
+    text-align: left;
+    font-size: 2em;
+    padding-top: 12vh;
+    padding-left: 2vw;
+}
+
+.movies-page-movie {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  justify-items: center;
+  max-width: 1200px;
+}
