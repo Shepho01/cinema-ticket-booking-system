@@ -19,9 +19,9 @@ import toyStoryPoster from "../../assets/movie-posters/toy-story-4.png";
 import mufasaPoster from "../../assets/movie-posters/mufasa.png"; 
 
 // Coming Soon Posters
-import supermanPoster from "../../assets/movie-posters/superman.png";
+import supermanPoster from "../../assets/movie-posters/Superman.png";
 import ballerinaPoster from "../../assets/movie-posters/ballerina.png";
-import f1Poster from "../../assets/movie-posters/f1.png";
+import f1Poster from "../../assets/movie-posters/F1.png";
 import fantastic4Poster from "../../assets/movie-posters/fantastic4.jpg";
 import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png";
 
