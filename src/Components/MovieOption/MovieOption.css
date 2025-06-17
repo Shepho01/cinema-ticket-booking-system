@@ -1,0 +1,25 @@
+.movie-option {
+  text-align: center;
+  padding: 20px;
+  width: 90%;
+}
+
+.movie-option-details {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 15px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.movie-option-details img {
+  vertical-align: middle;
+}
+
+.movie-option-name {
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}

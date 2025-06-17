@@ -1,6 +1,6 @@
 /* Define the navbar container */
 .navbarcenter-mobile-menu {
-    background-color: #07001E;
+    background-color: #121B26;
     padding: 10px 0;
     position: fixed;
     top: 0;
@@ -16,8 +16,7 @@
 /* Center navbar items */
 .navbarcenter-items {
     display: flex;
-    list-style: none;
-    justify-content: center; /* Center the items horizontally */
+    justify-content: center; 
     margin: 5px 25px;
     font-size: 22px;
     font-family: "AvenirRegular";
@@ -26,7 +25,9 @@
 
 
 .navbar-home-icon {
-    height: 5vh;
+    height: 50px;
+    position: fixed;
+    top: 25px; /* pushes it down from the top of the screen */
 }
 
 .navbar-links {
