@@ -5,7 +5,7 @@ function MoviesPage() {
     return ( 
         <div>
             <h1 className='movies-page-title'>Movies Showing Now</h1>
-            <div className=''>  
+       
                 <div className='movies-page-movie'>
                     <div>Sinners</div>
                     <div>Ballerina</div>
@@ -19,7 +19,7 @@ function MoviesPage() {
                     <div>Toy Story 4</div>
                     <div>Mufasa the Lion King</div>
                 </div>
-            </div>
+   
            
         </div>
      );
