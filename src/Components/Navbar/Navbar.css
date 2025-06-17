@@ -1,30 +1,48 @@
 /* Define the navbar container */
-nav {
-    --navbar-height: 73px; /* Define a variable for the navbar height */
-    background: #fff;
-    color: #000;
+.navbarcenter-mobile-menu {
+    background-color: #07001E;
     padding: 10px 0;
-    position: fixed; /* Ensures the navbar stays at the top */
-    top: 0; /* Sticks to the top of the viewport */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000; /* Set a high z-index to ensure it stays above other content */
-    height: var(--navbar-height); /* Consistent height */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+    text-align: center;
+    justify-content: center; /* Center the inner container */
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 80px; /* Adjust spacing between items here */
 }
 
 /* Center navbar items */
-.navbarcenter li {
-    display: inline;
+.navbarcenter-items {
+    display: flex;
     list-style: none;
+    justify-content: center; /* Center the items horizontally */
     margin: 5px 25px;
     font-size: 22px;
     font-family: "AvenirRegular";
-    text-align: center;
+    gap: 30vw;
 }
 
 
+.navbar-home-icon {
+    height: 5vh;
+}
 
+.navbar-links {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family:Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.navbar-links:hover {
+    color: #FFDF3E; 
+}
+
+a {
+    text-decoration: none;
+}

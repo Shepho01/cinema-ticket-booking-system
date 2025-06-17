@@ -2,32 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi"; // ✅ this line fixes the error
 import "./Navbar.css";
+import homeIcon from "../../assets/home.png"; // Adjust the path as necessary
 
 function Navbar(props) {
   return (
     <div>
-        <nav>
+        <nav className="navbarcenter-mobile-menu">
 
-            <ul className="navbarcenter mobile-menu">
-                <li>
-                    <Link to="/">
-                    <button>Home</button>
-                    </Link> 
-                </li>
-
-                <li>
-                    <Link to="/movies">
-                    <button>Movies</button>
-                    </Link>
-                </li>
+            <div className="navbarcenter-items">
+                <Link to="/">
+                    <img className="navbar-home-icon" src={homeIcon} alt="Home"/>
+                </Link> 
             
-                <li>
-                    <Link to="/contact">
-                    <button>Contact</button>
-                    </Link>
-                </li>
-            </ul>
+                <Link to="/movies">
+                    <p className="navbar-links"> MOVIES </p>
+                </Link>
 
+                <p className="navbar-links">SIGN IN</p>
+            </div>
         </nav>
     </div>
   );
