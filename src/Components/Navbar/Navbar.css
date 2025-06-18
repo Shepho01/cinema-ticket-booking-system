@@ -26,7 +26,6 @@
 
 .navbar-home-icon {
     height: 50px;
-    position: fixed;
     top: 25px; /* pushes it down from the top of the screen */
 }
 
@@ -46,4 +45,39 @@
 
 a {
     text-decoration: none;
+}
+
+/* iPads and tablets */
+@media (max-width: 1024px) {
+  .navbarcenter-mobile-menu {
+    padding: 6px 0; /* reduce vertical space */
+  }
+
+  .navbar-home-icon {
+    height: 40px;
+    top: 18px;
+  }
+}
+
+/* iPhones and small screens */
+@media (max-width: 600px) {
+  .navbarcenter-mobile-menu {
+    padding: 4px 0; /* make navbar height more compact */
+  }
+
+  .navbarcenter-items {
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    margin: 5px 0;
+  }
+
+  .navbar-home-icon {
+    height: 30px;
+    top: 12px;
+  }
+
+  .navbar-links {
+    font-size: 0.9rem;
+  }
 }

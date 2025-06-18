@@ -92,3 +92,61 @@
   background-color: #444;
   transform: scale(1.05);
 }
+
+
+/* iPads and medium devices */
+@media (max-width: 1024px) {
+  .date-pagination {
+    padding: 16px;
+  }
+
+  .date-list {
+    gap: 16px;
+  }
+
+  .date-item {
+    font-size: 15px;
+    padding: 6px 10px;
+  }
+
+  .time-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* iPhones and small screens */
+@media (max-width: 600px) {
+  .date-pagination {
+    padding: 12px;
+  }
+
+  .date-nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .date-list {
+    gap: 14px;
+  }
+
+  .date-item {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+
+  .arrow {
+    font-size: 1.3rem;
+    padding: 0 6px;
+  }
+
+  .time-list {
+    gap: 10px;
+  }
+
+  .time-item {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+}
