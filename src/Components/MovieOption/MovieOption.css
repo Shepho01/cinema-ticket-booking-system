@@ -22,3 +22,25 @@
     font-weight: 600;
     text-decoration: none;
 }
+
+.movie-option-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .movie-option {
+    width: 90%;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .movie-option {
+    width: 95%;
+  }
+}

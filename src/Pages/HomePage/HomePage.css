@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-top: 100px;
+  margin-top: 140px;
 }
 
 .homepage-option {
@@ -11,12 +11,19 @@
   font-size: 2rem;
   position: relative;
   transition: color 0.2s ease;
+  padding: 10px 20px;
+  border-radius: 6px;
+  user-select: none;
+}
+
+.homepage-option:hover {
+  color: #FFDF3E;
 }
 
 .homepage-option::after {
   content: "";
   position: absolute;
-  bottom: -6px;
+  bottom: 0px;
   left: 0;
   width: 100%;
   height: 2px;
@@ -41,6 +48,7 @@
   justify-content: center;    
   align-items: center;       
   text-align: center;
+  
 }
 
 .homepage-movies-page-movie {
@@ -52,6 +60,7 @@
   min-width: 500px;
 }
 
+/* Tablets / iPads */
 @media (max-width: 1024px) {
   .homepage-movies-page-movie {
     grid-template-columns: repeat(2, 1fr);
@@ -63,25 +72,32 @@
   }
 }
 
-/* iPhones and small devices */
+/* Phones / small devices */
 @media (max-width: 600px) {
+  .homepage-showing-options {
+    flex-direction: row; /* ✅ Ensure items stay side-by-side */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;      /* ✅ Allow wrapping if screen is very tight */
+    gap: 20px;
+    margin-top: 150px;
+    padding-top: 40px;
+  }
+
+  .homepage-option {
+    font-size: 1.1rem;
+    padding: 6px 12px;
+  }
+
+  .homepage-option::after {
+    height: 1px;
+    bottom: -2px;
+    transition: none;
+  }
+
   .homepage-movies-page-movie {
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 0 10px;
   }
-
-  .homepage-option {
-    font-size: 1.3rem;
-  }
-
-  .homepage-showing-options {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 100px;
-  }
-
-  
 }
-

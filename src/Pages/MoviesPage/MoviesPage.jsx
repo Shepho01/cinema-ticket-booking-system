@@ -25,6 +25,74 @@ import f1Poster from "../../assets/movie-posters/F1.png";
 import fantastic4Poster from "../../assets/movie-posters/fantastic4.jpg";
 import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png";
 
+const movieOptions = [
+  {
+    link: "/movies/sinners",
+    name: "Sinners",
+    poster: sinnersPoster,
+    classification: maIcon,
+  },
+  {
+    link: "/movies/spiderman-across-the-spider-verse",
+    name: "Spiderman Across the Spider-Verse",
+    poster: spidermanPoster,
+    classification: pgIcon,
+  },
+  {
+    link: "/movies/better-man",
+    name: "Better Man",
+    poster: betterManPoster,
+    classification: maIcon,
+  },
+  {
+    link: "/movies/mufasa-the-lion-king",
+    name: "Mufasa: The Lion King",
+    poster: mufasaPoster,
+    classification: pgIcon,
+  },
+  {
+    link: "/movies/greatest-showman",
+    name: "The Greatest Showman",
+    poster: greatestShowmanPoster,
+    classification: pgIcon,
+  },
+];
+
+
+const comingSoonMovieOptions = [
+  {
+    name: "Superman",
+    poster: supermanPoster,
+    classification: mIcon,
+    link: "/movies/superman",
+  },
+  {
+    name: "Ballerina",
+    poster: ballerinaPoster,
+    classification: maIcon,
+    link: "/movies/ballerina",
+  },
+  {
+    name: "Fantastic 4: First Steps",
+    poster: fantastic4Poster,
+    classification: mIcon,
+    link: "/movies/fantastic-4-first-steps",
+  },
+  {
+    name: "F1",
+    poster: f1Poster,
+    classification: mIcon,
+    link: "/movies/f1",
+  },
+  {
+    name: "Lilo and Stitch",
+    poster: liloAndStitchPoster,
+    classification: pgIcon,
+    link: "/movies/lilo-and-stitch",
+  },
+];
+
+
 
 function MoviesPage() {
     const [showingNow, setShowingNow] = useState(true);
@@ -60,25 +128,29 @@ function MoviesPage() {
             <div className="homepage-movies-section">
                 {showingNow && (
                 <div className="homepage-movies-page-movie">
-                    <MovieOption name = "Sinners" poster = {sinnersPoster} classification = {maIcon}/>
-                    <MovieOption name = "Spiderman Across the Spider-Verse" poster = {spidermanPoster} classification = {pgIcon}/>
-                    <MovieOption name = "Better Man" poster = {betterManPoster} classification = {maIcon}/>
-                    <MovieOption name = "Mufasa: The Lion King" poster = {mufasaPoster} classification = {pgIcon}/>
-                    <MovieOption name = "The Greatest Showman" poster = {greatestShowmanPoster} classification = {pgIcon}/>
-                    <MovieOption name = "Black Panther" poster = {blackPantherPoster} classification = {mIcon}/>
-                    <MovieOption name = "Dune Part 2" poster = {dunePoster} classification = {mIcon}/>
-                    <MovieOption name = "Bad Boys 2" poster = {badBoysPoster} classification = {maIcon}/>
-                    <MovieOption name = "Toy Story 4" poster = {toyStoryPoster} classification = {gIcon}/>
+                    {movieOptions.map((movie, index) => (
+                    <MovieOption
+                        key={index}
+                        link={movie.link}
+                        name={movie.name}
+                        poster={movie.poster}
+                        classification={movie.classification}
+                    />
+                    ))}
                 </div>
                 )}
 
                 {comingSoon && (
                 <div className="homepage-movies-page-movie">
-                    <MovieOption name = "Superman" poster = {supermanPoster} classification = {mIcon}/>
-                    <MovieOption name = "Ballerina" poster = {ballerinaPoster} classification = {maIcon}/>
-                    <MovieOption name = "Fantastic 4: First Steps" poster = {fantastic4Poster} classification = {mIcon}/>
-                    <MovieOption name = "F1" poster = {f1Poster} classification = {mIcon}/>
-                    <MovieOption name = "Lilo and Stitch" poster = {liloAndStitchPoster} classification = {pgIcon}/>
+                    {comingSoonMovieOptions.map((movie, index) => (
+                    <MovieOption
+                        key={index}
+                        name={movie.name}
+                        poster={movie.poster}
+                        classification={movie.classification}
+                        link={movie.link}
+                    />
+                    ))}
                 </div>
                 )}
             </div>

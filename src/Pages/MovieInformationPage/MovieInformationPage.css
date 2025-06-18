@@ -2,9 +2,8 @@
   display: flex;
   align-items: start; /* Adjust alignment if needed */
   justify-content: center; /* Center the content horizontally */
-  padding: 20px;
   gap: 20px; /* Optional: adds space between the divs */
-  margin-top: 100px;
+  margin-top: 140px;
 }
 
 .movie-information-page-details {
@@ -117,5 +116,27 @@
 
   .overview {
     width: 95%;
+  }
+}
+
+
+/* iPads and tablets */
+@media (max-width: 1024px) {
+  .movie-information-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 160px; /* Increased for iPads */
+  }
+}
+
+/* iPhones and small devices */
+@media (max-width: 600px) {
+  .movie-information-page {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px 20px;
+    margin-top: 180px; /* Increased more for iPhones */
   }
 }
