@@ -1,0 +1,94 @@
+.date-pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0d1117;
+  padding: 20px;
+  font-family: sans-serif;
+  color: white;
+}
+
+/* Navigation strip: arrows + date list */
+.date-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Horizontal list of date options */
+.date-list {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* Each date item */
+.date-item {
+  cursor: pointer;
+  position: relative;
+  font-size: 16px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+
+.date-item:hover {
+  color: #ffcc00;
+}
+
+/* Active date styling */
+.date-item.active {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.date-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #ffd700;
+}
+
+/* Arrows for left/right navigation */
+.arrow {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+/* Time list below dates */
+.time-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+/* Time slot buttons */
+.time-item {
+  background-color: #222;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.time-item:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
