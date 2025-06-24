@@ -1,0 +1,52 @@
+.ticket-page {
+  display: flex;
+  align-items: start; /* Adjust alignment if needed */
+  justify-content: center; /* Center the content horizontally */
+  gap: 20px; /* Optional: adds space between the divs */
+  margin-top: 140px;
+}
+
+.ticket-page-details {
+    translate: 0 -4vh; /* Adjusts the position of the title */
+    width: 35%; /* Adjust width as needed */
+}
+
+.ticket-page-title {
+    font-size: 2rem;
+    color: white;
+    text-align: start;
+    width: 100%; /* Ensures the title takes full width */
+    font-size: 3rem; /* Adjusted font size for better visibility */
+    margin-bottom: 0;
+}
+
+.ticket-page-classification {
+    display: flex;
+    align-content: start;
+    align-items: center; /* Adjust alignment if needed */ 
+    justify-content: start; /* Center the content horizontally */
+    gap: 20px; 
+}
+
+.ticket-page-details h2 {
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}
+
+.ticket-page-details p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ticket-page-showtimes-title {
+  font-size: 2rem;
+  color: white;
+  text-align: start;
+  width: 100%; /* Ensures the title takes full width */
+  margin-bottom: 0.5rem; /* Adjusted for better spacing */
+  margin-left: 18vw;
+}
+
+.overview {
+  width: 75%;
+}

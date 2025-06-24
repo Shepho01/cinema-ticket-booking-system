@@ -30,7 +30,7 @@ const MovieInformationPage = () => {
   const { movie_name } = useParams();
 
   const movieData = {
-    "sinners": {
+    "Sinners": {
       name: "Sinners",
       poster: sinnersPoster, // or import and use `sinnersPoster`
       classification: maIcon,
@@ -40,8 +40,21 @@ const MovieInformationPage = () => {
       director: "Ryan Coogler",
       cast: ["Michael B. Jordan", "Hailee Steinfeld", "Miles Caton"],
       classification_details: "Strong horror violence, blood and gore and sex scenes",
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+    ]
     },
-    "spiderman-across-the-spider-verse": {
+    "Spiderman-Across-the-Spider-Verse": {
       name: "Spiderman Across the Spider-Verse",
       poster: spidermanPoster, // or import and use `spidermanPoster`
       classification: pgIcon,
@@ -49,29 +62,81 @@ const MovieInformationPage = () => {
       cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
       description: "Miles Morales swings across dimensions with new Spider-heroes.",
       classification_details: "Mild animated violence and coarse language",
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+    ]
     },
-    "better-man": {
+    "Better-Man": {
       name: "Better Man",
       poster: betterManPoster,
       classification: maIcon,
       cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
       description: "A biographical film exploring the life of a legendary musician.",
       classification_details: "Strong coarse language and drug use",
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+    ]
     },
-    "mufasa-the-lion-king": {
+    "Mufasa-The-Lion-King": {
       name: "Mufasa: The Lion King",
       poster: mufasaPoster,
       classification: pgIcon,
       cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
       description: "Discover the untold origin story of the king of the Pride Lands.",
       classification_details: "Mild animated violence and coarse language",
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+    ]
     },
-    "greatest-showman": {
+    "The-Greatest-Showman": {
       name: "The Greatest Showman",
       poster: greatestShowmanPoster,
       classification: pgIcon,
       cast: ["Hugh Jackman", "Zac Efron", "Michelle Williams", "Zendaya"],
       description: "A musical about P.T. Barnum’s creation of show business.",
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+    ]
       
     }
   };
@@ -109,7 +174,7 @@ const MovieInformationPage = () => {
         <div>
             <h1 className='movie-information-page-showtimes-title'>Showtimes</h1>
       
-            <DatePagination />
+            <DatePagination dateData = {movie.showtimes} />
 
         </div>   
     

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./DataPagination.css";
 
-const DatePagination = () => {
+const DatePagination = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate(); 
+  const { movie_name } = useParams(); 
 
-  const dateData = [
-    { label: "Today", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
-    { label: "Tomorrow", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
-    { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
-    { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
-    { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
-    { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
-    { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
-    { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
-    { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
-    { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
-    { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
-  ];
+  const handleTimeClick = (time) => {
+    const selectedDate = props.dateData[activeIndex].label;
+
+    // Safely encode date and time for use in URL
+    const encodedDate = encodeURIComponent(selectedDate);
+    const encodedTime = encodeURIComponent(time);
+
+    // Navigate to /tickets/:movie_name/:date/:time
+    navigate(`/tickets/${movie_name}/${encodedDate}/${encodedTime}`);
+  };
 
   return (
     <div className="date-pagination">
@@ -29,13 +29,13 @@ const DatePagination = () => {
         </button>
 
         <ul className="date-list">
-          {dateData.map((date, index) => (
+          {props.dateData.map((date, index) => (
             <li
               key={index}
               className={`date-item ${index === activeIndex ? "active" : ""}`}
               onClick={() => setActiveIndex(index)}
             >
-              {date.label}
+             {date.label}
             </li>
           ))}
         </ul>
@@ -44,7 +44,7 @@ const DatePagination = () => {
           className="arrow"
           onClick={() =>
             setActiveIndex((prev) =>
-              Math.min(dateData.length - 1, prev + 1)
+              Math.min(props.dateData.length - 1, prev + 1)
             )
           }
         >
@@ -53,10 +53,10 @@ const DatePagination = () => {
       </div>
 
       <ul className="time-list">
-        {dateData[activeIndex].times.map((time, idx) => (
-          <li key={idx} className="time-item">
+        {props.dateData[activeIndex].times.map((time, idx) => (
+          <button key={idx} className="time-item" onClick={() => handleTimeClick(time)}>
             {time}
-          </li>
+          </button>
         ))}
       </ul>
     </div>

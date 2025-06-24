@@ -1,0 +1,35 @@
+.booking-page-container {
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+.booking-page-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.booking-page-container p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.booking-section-navigation {
+  display: flex;
+  justify-content: center;     /* Center the group horizontally */
+  gap: 3rem;                   /* Space between each section title */
+  margin: 2rem 0;
+  flex-wrap: wrap;             /* Allows wrapping on smaller screens */
+}
+
+.booking-section-navigation h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  cursor: default;
+  transition: color 0.3s ease;
+}
+
+.active-step {
+  color: #ffd700;
+  border-bottom: 3px solid #ffd700;
+  padding-bottom: 0.3rem;
+}

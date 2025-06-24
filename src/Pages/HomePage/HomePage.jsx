@@ -23,31 +23,31 @@ import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png"
 
 const movieOptions = [
   {
-    link: "/movies/sinners",
+    link: "/movies/Sinners",
     name: "Sinners",
     poster: sinnersPoster,
     classification: maIcon,
   },
   {
-    link: "/movies/spiderman-across-the-spider-verse",
+    link: "/movies/Spiderman-Across-the-Spider-Verse",
     name: "Spiderman Across the Spider-Verse",
     poster: spidermanPoster,
     classification: pgIcon,
   },
   {
-    link: "/movies/better-man",
+    link: "/movies/Better-Man",
     name: "Better Man",
     poster: betterManPoster,
     classification: maIcon,
   },
   {
-    link: "/movies/mufasa-the-lion-king",
+    link: "/movies/Mufasa-The-Lion-King",
     name: "Mufasa: The Lion King",
     poster: mufasaPoster,
     classification: pgIcon,
   },
   {
-    link: "/movies/greatest-showman",
+    link: "/movies/The-Greatest-Showman",
     name: "The Greatest Showman",
     poster: greatestShowmanPoster,
     classification: pgIcon,
