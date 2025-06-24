@@ -180,7 +180,6 @@ const BookingPage = () => {
         <h2 className={currentSection === 4 ? 'active-step' : ''}>Confirmation</h2>
     </div>
 
-
       <div className="booking-section-content">
         {renderSection()}
       </div>
@@ -193,7 +192,7 @@ const BookingPage = () => {
       </div>
       
       
-
+    
 
   
   </div>);

@@ -7,6 +7,21 @@ const SeatsSelection = (props) => {
 
   return (
     <div>
+        <div className="seat-legend">
+            <div className="seat-legend-item">
+                <div className="legend-box legend-available"></div>
+                <span>Available</span>
+            </div>
+            <div className="seat-legend-item">
+                <div className="legend-box legend-unavailable"></div>
+                <span>Unavailable</span>
+            </div>
+            <div className="seat-legend-item">
+                <div className="legend-box legend-selected"></div>
+                <span>Selected</span>
+            </div>
+        </div>
+
       <h2 className='seats-selection-cinema-screen'>CINEMA SCREEN</h2>
       <div className="seats-grid">
         {props.seats.map((row, rowIndex) => (

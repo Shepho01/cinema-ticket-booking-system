@@ -1,13 +1,13 @@
 .seats-selection-cinema-screen {
   display: flex;
-  justify-content: center;     /* center text horizontally */
-  align-items: center;         /* center text vertically */
+  justify-content: center; 
+  align-items: center;        
   font-size: 1rem;
   background-color: #1B2E46;
   color: white;
   padding: 0.5rem 0;
   margin: 2rem 0;
-  width: 100%;                 /* full width of parent */
+  width: 100%;                 
   border-radius: 6px;
   text-align: center;
   font-weight: 700;
@@ -39,20 +39,20 @@
 }
 
 .available {
-  background-color: #486FA0; /* green */
+  background-color: #486FA0;
   color: rgb(255, 255, 255);
   cursor: pointer;
   font-size: 1rem;
 }
 
 .unavailable {
-  background-color: #DE0000;
+  background-color: #cf0000;
   color: rgb(255, 255, 255);
   font-size: 1rem;
 }
 
 .selected {
-  background-color: #0ac100; /* orange for selected */
+  background-color: #0ac100;
   color: white;
   cursor: pointer;
 }
@@ -63,4 +63,34 @@
   margin-top: 1rem;
   font-weight: 500;
   padding-top:1rem;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.seat-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.legend-box {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 4px;
+}
+
+.legend-available {
+  background-color: #486FA0;
+}
+.legend-unavailable {
+  background-color: #cf0000;
+}
+.legend-selected {
+  background-color: #0ac100;
 }
