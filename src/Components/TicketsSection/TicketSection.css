@@ -1,0 +1,9 @@
+.ticket-section-sub-headings {
+  display: flex;
+  justify-content: center;     
+  align-items: center;        
+  gap: 8rem;                 
+  margin-bottom: 2rem;
+  text-align: center;
+}
+

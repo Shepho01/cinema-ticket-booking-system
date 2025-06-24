@@ -103,8 +103,6 @@ const BookingPage = () => {
   const [seats, setSeats] = useState(movie ? movie.seats : []); 
   const [selectedCount, setSelectedCount] = useState(0);
 
-  const [totalSeats, setTotalSeats] = useState(0);
-
   useEffect(() => {
     const count = seats.reduce(
       (total, row) => total + row.filter(seat => seat === 2).length,
