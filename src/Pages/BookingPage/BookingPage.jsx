@@ -124,11 +124,22 @@ const BookingPage = () => {
 
   return (
     <div className="booking-page-container">
-      <h1>Booking for {movie.name}</h1>
-      <p><strong>Date:</strong> {decodeURIComponent(date)}</p>
-      <p><strong>Time:</strong> {decodeURIComponent(time)}</p>
 
+      <div className='booking-information-page'>
+        <img src={movie.poster} alt={movie.name} style={{ width: '215px' }} />
 
+        <div className='booking-information-page-details'>
+            <h1 className='booking-information-page-title'>{movie.name}</h1>
+            <div className='booking-information-page-classification'>
+              <img src={movie.classification} alt={movie.name} style={{ height: '30px' }} />
+              <p>{movie.classification_details}</p>
+            </div>
+            <div className='booking-information-page-classification'>
+              <p><strong>Date:</strong> {decodeURIComponent(date)}</p>
+              <p><strong>Time:</strong> {decodeURIComponent(time)}</p>
+            </div>
+        </div>             
+      </div>
       
 
     <div className="booking-section-navigation">
@@ -141,12 +152,17 @@ const BookingPage = () => {
 
       <div className="booking-section-content">
         {renderSection()}
+
+        
+
       </div>
 
-        <button onClick={goToPrev} disabled={currentSection === 1}>Back</button>
-        <button onClick={goToNext} disabled={currentSection === 4}>Next</button>
-    </div>
-  );
+      <div className="booking-section-navigation-buttons">
+        <button className="booking-section-navigation-back" onClick={goToPrev} disabled={currentSection === 1}>BACK</button>
+        <button className="booking-section-navigation-next" onClick={goToNext} disabled={currentSection === 4}>NEXT</button>
+      </div>
+  
+  </div>);
 };
 
 export default BookingPage;

@@ -3,6 +3,36 @@
   padding: 2rem;
 }
 
+.booking-information-page {
+  display: flex;
+  align-items: start; /* Adjust alignment if needed */
+  justify-content: center; /* Center the content horizontally */
+  gap: 20px; /* Optional: adds space between the divs */
+  margin-top: 80px;
+}
+
+.booking-information-page-details {
+    translate: 0 -4vh; /* Adjusts the position of the title */
+    width: 35%; /* Adjust width as needed */
+}
+
+.booking-information-page-title {
+    font-size: 2rem;
+    color: white;
+    text-align: start;
+    width: 100%; /* Ensures the title takes full width */
+    font-size: 3rem; /* Adjusted font size for better visibility */
+    margin-bottom: 0;
+}
+
+.booking-information-page-classification {
+    display: flex;
+    align-content: start;
+    align-items: center; /* Adjust alignment if needed */ 
+    justify-content: start; /* Center the content horizontally */
+    gap: 20px; 
+}
+
 .booking-page-container h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -28,8 +58,45 @@
   transition: color 0.3s ease;
 }
 
+.booking-section-navigation-buttons {
+  display: flex;
+  justify-content: center;     /* Center the group horizontally */
+  gap: 3rem;                   /* Space between each section title */
+  margin: 2rem 0;
+  flex-wrap: wrap;             /* Allows wrapping on smaller screens */
+}
+
+.booking-section-navigation-back {
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  background-color: transparent;
+  padding: 0.8rem 2rem;
+  font-weight: 700;
+}
+
+.booking-section-navigation-next {
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  color: black;
+  background-color: #ffd700;
+  padding: 0.8rem 2rem;
+  outline: none;  /* removes focus outline */
+  border: none;   /* removes visible border/outline */
+  font-weight: 700;
+}
+
 .active-step {
   color: #ffd700;
   border-bottom: 3px solid #ffd700;
   padding-bottom: 0.3rem;
 }
+
+.booking-section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  
