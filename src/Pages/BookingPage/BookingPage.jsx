@@ -38,10 +38,12 @@ const BookingPage = () => {
   const goToPrev = () => setCurrentSection((prev) => Math.max(prev - 1, 1));
 
   const defaultSeats = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 0, 0, 1, 1, 1],
+    [1, 1, 0, 0, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1],
+    [1, 1, 1, 0, 1, 1, 1],
   ];
 
   const movieData = {
@@ -96,13 +98,17 @@ const BookingPage = () => {
     };
 
 
-    const movie = movieData[movie_name];
+  const movie = movieData[movie_name];
+
+  const handleSelect = () => {
+
+  }
 
   const renderSection = () => {
     switch (currentSection) {
 
       case 1:
-        return <SeatsSelection/>;
+        return <SeatsSelection seats = {movie.seats}/>;
       
         case 2:
         return <TicketsSection/>;
@@ -152,9 +158,6 @@ const BookingPage = () => {
 
       <div className="booking-section-content">
         {renderSection()}
-
-        
-
       </div>
 
       <div className="booking-section-navigation-buttons">
