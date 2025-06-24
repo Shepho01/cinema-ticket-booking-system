@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './BookingPage.css';
 
 import ConfirmationSection from '../../Components/ConfirmationSection/ConfirmationSection.jsx';
@@ -33,6 +33,7 @@ import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png"
 const BookingPage = () => {
   const { movie_name, date, time } = useParams();
   const [currentSection, setCurrentSection] = useState(1);
+
 
   const goToNext = () => setCurrentSection((prev) => Math.min(prev + 1, 4));
   const goToPrev = () => setCurrentSection((prev) => Math.max(prev - 1, 1));
@@ -99,18 +100,42 @@ const BookingPage = () => {
 
 
   const movie = movieData[movie_name];
+  const [seats, setSeats] = useState(movie ? movie.seats : []); 
+  const [selectedCount, setSelectedCount] = useState(0);
 
-  const handleSelect = () => {
+  const [totalSeats, setTotalSeats] = useState(0);
 
-  }
+  useEffect(() => {
+    const count = seats.reduce(
+      (total, row) => total + row.filter(seat => seat === 2).length,
+      0
+    );
+    setSelectedCount(count);
+  }, [seats]);
+
+
+  const handleSelect = (row, col) => {
+    setSeats(prevSeats =>
+      prevSeats.map((r, rowIndex) =>
+        r.map((seat, colIndex) => {
+          if (rowIndex === row && colIndex === col) {
+            if (seat === 1) return 2;           // available → selected
+            if (seat === 2) return 1;           // selected → available
+          }
+          return seat;                          // no change
+        })
+      )
+    );
+  };
+
 
   const renderSection = () => {
     switch (currentSection) {
 
       case 1:
-        return <SeatsSelection seats = {movie.seats}/>;
+        return <SeatsSelection seats={seats} onSelect={handleSelect} />;
       
-        case 2:
+      case 2:
         return <TicketsSection/>;
 
       case 3:
@@ -160,10 +185,16 @@ const BookingPage = () => {
         {renderSection()}
       </div>
 
+      <p className="selected-seats-info"><strong>Selected Seats:</strong> {selectedCount}</p>
+      
       <div className="booking-section-navigation-buttons">
         <button className="booking-section-navigation-back" onClick={goToPrev} disabled={currentSection === 1}>BACK</button>
         <button className="booking-section-navigation-next" onClick={goToNext} disabled={currentSection === 4}>NEXT</button>
       </div>
+      
+      
+
+
   
   </div>);
 };
