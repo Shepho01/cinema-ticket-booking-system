@@ -2,10 +2,10 @@
   display: flex;
   justify-content: center;     /* center text horizontally */
   align-items: center;         /* center text vertically */
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: #1B2E46;
   color: white;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   margin: 2rem 0;
   width: 100%;                 /* full width of parent */
   border-radius: 6px;
@@ -26,8 +26,9 @@
 }
 
 .seat {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem;
   border-radius: 6px;
   display: flex;
   align-items: center;

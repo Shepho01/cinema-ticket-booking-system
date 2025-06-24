@@ -1,6 +1,5 @@
 .booking-page-container {
-  margin-top: 4rem;
-  padding: 2rem;
+  margin-top: 8rem;
 }
 
 .booking-information-page {
@@ -47,7 +46,7 @@
   display: flex;
   justify-content: center;     
   gap: 3rem;                  
-  margin: 2rem 0;
+  margin: 1rem 0;
   flex-wrap: wrap;             
 }
 
