@@ -103,6 +103,8 @@ const BookingPage = () => {
   const [seats, setSeats] = useState(movie ? movie.seats : []); 
   const [selectedCount, setSelectedCount] = useState(0);
 
+  const [totalTicketsSelected, setTotalTicketsSelected] = useState(0);
+
   useEffect(() => {
     const count = seats.reduce(
       (total, row) => total + row.filter(seat => seat === 2).length,
@@ -134,7 +136,7 @@ const BookingPage = () => {
         return <SeatsSelection seats={seats} onSelect={handleSelect} />;
       
       case 2:
-        return <TicketsSection/>;
+        return <TicketsSection setTotalTicketsSelected={setTotalTicketsSelected} selectedCount={selectedCount}/>;
 
       case 3:
         return <PaymentSection/>;
@@ -186,7 +188,25 @@ const BookingPage = () => {
       
       <div className="booking-section-navigation-buttons">
         <button className="booking-section-navigation-back" onClick={goToPrev} disabled={currentSection === 1}>BACK</button>
-        <button className="booking-section-navigation-next" onClick={goToNext} disabled={currentSection === 4}>NEXT</button>
+    
+        <button
+          className={`booking-section-navigation-next ${
+            currentSection === 4 ||
+            selectedCount === 0 ||
+            (currentSection === 2 && totalTicketsSelected !== selectedCount)
+              ? 'disabled-button'
+              : ''
+          }`}
+          onClick={goToNext}
+          disabled={
+            currentSection === 4 ||
+            selectedCount === 0 ||
+            (currentSection === 2 && totalTicketsSelected !== selectedCount)
+          }
+        >
+          NEXT
+        </button>
+
       </div>
       
       

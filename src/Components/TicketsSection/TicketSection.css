@@ -1,9 +1,54 @@
-.ticket-section-sub-headings {
-  display: flex;
-  justify-content: center;     
-  align-items: center;        
-  gap: 8rem;                 
-  margin-bottom: 2rem;
+.ticket-table {
+  width: 40%;
+  margin: 20px auto;
+  color: white;
+  font-family: sans-serif;
+}
+
+.ticket-header,
+.ticket-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ffffff;
+  align-items: center;
   text-align: center;
 }
 
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-control button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.quantity-control input {
+  width: 30px;
+  text-align: center;
+  background-color: #222;
+  color: white;
+  border: 1px solid #555;
+}
+
+.ticket-summary {
+  margin-top: 20px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ticket-summary div {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  font-weight: bold;
+}
