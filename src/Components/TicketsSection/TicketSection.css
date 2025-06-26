@@ -1,6 +1,5 @@
 .ticket-table {
-  width: 40%;
-  margin: 20px auto;
+  width: 30vw;
   color: white;
   font-family: sans-serif;
 }
@@ -51,4 +50,13 @@
   justify-content: space-between;
   margin: 5px 0;
   font-weight: bold;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .ticket-table {
+    width: 320px;
+    font-size: 0.9rem;
+    margin: 0 auto;     
+  }
 }
