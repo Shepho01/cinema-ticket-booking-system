@@ -7,6 +7,8 @@ import pgIcon from "../../assets/classification/PG.png";
 import mIcon from "../../assets/classification/M.png";
 import maIcon from "../../assets/classification/MA.png";
 
+import Carousel from '../../Components/Carousel/Carousel';
+
 // Now Showing Posters
 import sinnersPoster from "../../assets/movie-posters/sinners-poster.png";
 import spidermanPoster from "../../assets/movie-posters/spiderman.png";
@@ -88,6 +90,7 @@ const comingSoonMovieOptions = [
   },
 ];
 
+const images = [supermanPoster, f1Poster, betterManPoster, sinnersPoster];
 
 const HomePage = () => {
   const [showingNow, setShowingNow] = useState(true);
@@ -105,6 +108,7 @@ const HomePage = () => {
 
   return (
     <div>
+      <Carousel images={images} />
       <div className="homepage-showing-options">
         <h1
           onClick={toggleShowingNow}
