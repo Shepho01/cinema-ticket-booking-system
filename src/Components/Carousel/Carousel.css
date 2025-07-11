@@ -9,6 +9,8 @@
   width: 800px;
   margin: 40px auto;
   overflow: visible;
+  justify-content: center;
+  text-align: center;
 }
 
 .carousel-track-container {
@@ -22,23 +24,45 @@
   display: flex;
   transition: transform 0.7s ease-in-out;
   width: 50vw;
+  gap: 5vw;
+  background-color: aqua;
 }
 
 .carousel-image {
+  display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   flex-shrink: 0;
-  margin: 0 10px;
+  margin: 100px auto;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  width: 40vw;
+  height: 55vh;
+  width: 20vw;
 }
 
-.carousel-cover {
-    z-index: 1;
-    width: 100px;
-    height: 100px;
+.carousel-cover-left {
+  z-index: 1;
+  width: 35vw;
+  height: 80vh;
+  top: 23vh;
+  position: absolute;
+  left: 0;
+  height: 60vh;
+  background-color: rgba(240, 248, 255, 0.7); /* semi-transparent */
+  pointer-events: none; /* allow clicks to pass through */
+}
+
+.carousel-cover-right {
+  z-index: 1;
+  width: 35vw;
+  height: 80vh;
+  top: 250px;
+  position: absolute;
+  right: 0;
+  height: 60vh;
+  background-color: rgba(240, 248, 255, 0.7); /* semi-transparent */
+  pointer-events: none; /* allow clicks to pass through */
 }
 
 .carousel-button {
