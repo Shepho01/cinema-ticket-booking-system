@@ -3,25 +3,18 @@ import './Carousel.css';
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const imageElement = document.querySelector('.carousel-image');
+  // Removed direct DOM access to prevent errors in React
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
-      console.log('newIndex:', newIndex);
       return newIndex;
     });
-
   };
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
-      // Get the image width from CSS
-      
-      const imageWidth = imageElement ? imageElement.offsetWidth : 0;
-      console.log('newIndex:', newIndex, 'imageWidth:', imageWidth);
-
       return newIndex;
     });
   };
@@ -32,12 +25,21 @@ const Carousel = ({ images }) => {
 
   return (
     <div className="carousel-wrapper">
-      <div className='carousel-cover-left'></div>
-      <div className='carousel-cover-right'></div>
+      <div className='carousel-cover-left'>
+
+
+      </div>
+
+      <div className="carousel-cover-right">
+      </div>
 
       <div className="carousel">
+        
         <button className="carousel-button left" onClick={prevSlide}>
           &#10094;
+        </button>
+        <button className="carousel-button right" onClick={nextSlide}>
+          &#10095;
         </button>
 
         <div className="carousel-track-container" style={{ overflow: 'hidden' }}>
@@ -62,9 +64,7 @@ const Carousel = ({ images }) => {
           </div>
         </div>
 
-        <button className="carousel-button right" onClick={nextSlide}>
-          &#10095;
-        </button>
+        
       </div>
     </div>
   );
