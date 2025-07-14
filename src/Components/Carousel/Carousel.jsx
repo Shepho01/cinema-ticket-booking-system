@@ -25,11 +25,6 @@ const Carousel = ({ images }) => {
 
   return (
     <div className="carousel-wrapper">
-      <div className='carousel-cover-left'>
-      </div>
-
-      <div className="carousel-cover-right">
-      </div>
 
       <div className="carousel">
         

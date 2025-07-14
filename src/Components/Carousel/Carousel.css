@@ -37,6 +37,7 @@
   object-fit: cover;
   border-radius: 10px;
   height: 50vh;
+  width: 60%;
 }
 
 .carousel-cover-left {
@@ -87,4 +88,30 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+@media (max-width: 768px) {
+  .carousel {
+    width: 100%;
+    margin: 2rem auto;
+    height: auto;
+  }
+
+  .carousel-track-container {
+    padding: 0 5%;
+  }
+
+  .carousel-track {
+    gap: 4vw;
+  }
+
+  .carousel-image {
+    width: 250px;
+    height: 35vh;
+    margin: 2rem auto;
+  }
+
+  .carousel-button {
+    font-size: 1.5rem;
+    padding: 0 10px;
+  }
+}
 
