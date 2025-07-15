@@ -1,17 +1,18 @@
 .carousel-wrapper {
-  width: 100%;
+  display: flex;
   overflow: hidden;
   margin-top: 10rem;
 }
 
 .carousel {
   position: relative;
-  width: 800px;
+  width: 1000px;
   margin: -10vh auto;
   overflow: visible;
   justify-content: center;
   text-align: center;
   height: 50%;
+
 }
 
 .carousel-track-container {
@@ -24,42 +25,6 @@
   display: flex;
   transition: transform 0.7s ease-in-out;
   gap: 2vw;
-}
-
-.carousel-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  flex-shrink: 0;
-  margin: 100px auto;
-  object-fit: cover;
-  border-radius: 10px;
-  height: 550px;
-  width: 60%;
-}
-
-.carousel-cover-left {
-  z-index: 1;
-  width: 37%;
-  top: 0;
-  position: absolute;
-  left: 0;
-  height: 70%;
-  background-color: rgba(11, 21, 33, 0.7);
-  pointer-events: none; /* allow clicks to pass through */
-}
-
-.carousel-cover-right {
-  z-index: 1;
-  width: 37%;
-  top: 0;
-  position: absolute;
-  right: 0;
-  height: 70%;
-  background-color: rgba(11, 21, 33, 0.7);
-  pointer-events: none; /* allow clicks to pass through */
 }
 
 .carousel-button {
@@ -77,15 +42,17 @@
 }
 
 .carousel-button.left {
-  left: 0;
+  left: -60px;
+  background-color: rgb(32, 43, 74);
 }
 
 .carousel-button.right {
-  right: 0;
+  right: -60px;
+  background-color: rgb(32, 43, 74);
 }
 
 .carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(32, 43, 74, 0.7);
 }
 
 @media (max-width: 768px) {
@@ -103,15 +70,8 @@
     gap: 4vw;
   }
 
-  .carousel-image {
-    width: 250px;
-    height: 355px;
-    margin: 2rem auto;
-  }
-
   .carousel-button {
     font-size: 1.5rem;
     padding: 0 10px;
   }
 }
-

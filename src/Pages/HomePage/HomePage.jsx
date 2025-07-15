@@ -23,6 +23,13 @@ import f1Poster from "../../assets/movie-posters/F1.png";
 import fantastic4Poster from "../../assets/movie-posters/fantastic4.jpg";
 import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png";
 
+// Movie Banners
+import supermanBanner from "../../assets/movie-banners/superman_banner.png";
+import sinnersBanner from "../../assets/movie-banners/sinners_banner.png";
+import fantastic4Banner from "../../assets/movie-banners/fantastic4_banner.png";
+
+
+
 const movieOptions = [
   {
     link: "/movies/Sinners",
@@ -90,7 +97,7 @@ const comingSoonMovieOptions = [
   },
 ];
 
-const images = [supermanPoster, f1Poster, betterManPoster, sinnersPoster];
+const images = [supermanBanner, sinnersBanner, fantastic4Banner];
 
 const HomePage = () => {
   const [showingNow, setShowingNow] = useState(true);

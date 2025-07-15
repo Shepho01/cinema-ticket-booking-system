@@ -1,0 +1,23 @@
+.carousel-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex-shrink: 0;
+  margin: 100px auto;
+  object-fit: cover;
+  border-radius: 10px;
+  height: 500px;
+}
+
+/* iPhone and iPad specific styles */
+@media only screen 
+  and (max-width: 820px) 
+  and (pointer: coarse) 
+  and (hover: none) {
+  .carousel-image {
+    height: 300px;
+    margin: 40px auto;
+  }
+}

@@ -110,24 +110,24 @@ function MoviesPage() {
 
     return ( 
         <div>
-            <div className="homepage-showing-options">
+            <div className="moviepage-showing-options">
                 <h1
                 onClick={toggleShowingNow}
-                className={`homepage-option ${showingNow ? 'active' : ''}`}
+                className={`moviepage-option ${showingNow ? 'active' : ''}`}
                 >
                 Now Showing
                 </h1>
                 <h1
                 onClick={toggleComingSoon}
-                className={`homepage-option ${comingSoon ? 'active' : ''}`}
+                className={`moviepage-option ${comingSoon ? 'active' : ''}`}
                 >
                 Coming Soon
                 </h1>
             </div>
         
-            <div className="homepage-movies-section">
+            <div className="moviepage-movies-section">
                 {showingNow && (
-                <div className="homepage-movies-page-movie">
+                <div className="moviepage-movies-page-movie">
                     {movieOptions.map((movie, index) => (
                     <MovieOption
                         key={index}
@@ -141,7 +141,7 @@ function MoviesPage() {
                 )}
 
                 {comingSoon && (
-                <div className="homepage-movies-page-movie">
+                <div className="moviepage-movies-page-movie">
                     {comingSoonMovieOptions.map((movie, index) => (
                     <MovieOption
                         key={index}

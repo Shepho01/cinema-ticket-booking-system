@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './Carousel.css';
 
+import CarouselIcon from './CarouselIcon.jsx';
+
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // Removed direct DOM access to prevent errors in React
+
+  // Use a ref to access the  element
+  const imageRef = React.useRef(null);
+  
+  const carousel = document.querySelector('.carousel-image');
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
       return newIndex;
     });
+
+    console.log("currentIndex", images);
   };
 
   const nextSlide = () => {
@@ -17,17 +25,20 @@ const Carousel = ({ images }) => {
       const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
       return newIndex;
     });
+
+    console.log("currentRef", images);
+
+    console.log("carousel", carousel.height);
   };
 
 
-  // Use a ref to access the image element
-  const imageRef = React.useRef(null);
+
 
   return (
     <div className="carousel-wrapper">
 
       <div className="carousel">
-        
+
         <button className="carousel-button left" onClick={prevSlide}>
           &#10094;
         </button>
@@ -45,9 +56,8 @@ const Carousel = ({ images }) => {
             }}
           >
             {images.map((src, index) => (
-              <img
+              <CarouselIcon
                 key={index}
-                className="carousel-image"
                 src={src}
                 alt={`slide-${index}`}
                 style={{ flexShrink: 0 }}
@@ -57,7 +67,7 @@ const Carousel = ({ images }) => {
           </div>
         </div>
 
-        
+
       </div>
     </div>
   );
