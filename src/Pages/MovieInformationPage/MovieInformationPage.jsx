@@ -32,7 +32,7 @@ const MovieInformationPage = () => {
   const movieData = {
     "Sinners": {
       name: "Sinners",
-      poster: sinnersPoster, // or import and use `sinnersPoster`
+      poster: sinnersPoster,
       classification: maIcon,
       overview: "Trying to leave their troubled lives behind, twin brothers (Michael B. Jordan) return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.",
       release_date: "17/04/2025",
@@ -56,7 +56,7 @@ const MovieInformationPage = () => {
     },
     "Spiderman-Across-the-Spider-Verse": {
       name: "Spiderman Across the Spider-Verse",
-      poster: spidermanPoster, // or import and use `spidermanPoster`
+      poster: spidermanPoster,
       classification: pgIcon,
       run_time: "2 hrs 0 min",
       cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
@@ -138,7 +138,123 @@ const MovieInformationPage = () => {
       { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
     ]
       
+    },
+
+    "superman": {
+      name: "Superman",
+      poster: supermanPoster,
+      classification: mIcon,
+      classification_details: "Mild animated violence and coarse language",
+      description: "Superman faces the challenges in a world where hope is not valued.",
+      director: "James Gunn",
+      cast: ["David Corensweat", "Nicholas Hault", "Nathan Fillion" ],
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+      ]
+    },
+
+    "ballerina": {
+      name: "Ballerina",
+      poster: ballerinaPoster,
+      classification: maIcon,
+      classification_details: "Strong violence and coarse language",
+      overview: "Vengeance is a dance in this action-packed thriller where a ballerina seeks justice for her murdered family.",
+      director: "Len Wiseman",
+      cast: ["Ana de Armas", "Keanu Reeves", "Norman Reedus" ],
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+      ]
+    },
+
+    "fantastic-4-first-steps": {
+      name: "Fantastic 4: First Steps",
+      poster: fantastic4Poster,
+      classification: mIcon,
+      classification_details: "Moderate violence and coarse language",
+      overview: "The iconic superhero family faces a threat from an outer space entity.",
+      director: "Matt Shakman",
+      cast: ["Pedro Pascal", "Vanessa Kirby", "Joseph Quinn", "Ebon Moss-Bachrach" ],
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+      ]
+    },
+
+    "f1": {
+      name: "F1",
+      poster: f1Poster,
+      classification: mIcon,
+      classification_details: "Mature themes and coarse language",
+      overview: "Experience the thrill of Formula 1 racing with this high-octane film.",
+      director: "Joseph Kosinski",
+      cast: ["Brad Pitt", "Damson Idris", "Javiar Bardem" ],
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+      ]
+    },
+
+    "lilo-and-stitch": {
+      name: "Lilio and Stitch",
+      poster: liloAndStitchPoster,
+      classification: pgIcon,
+      classification_details: "Parental guidance recommended",
+      overview: "Experience the heartwarming story of Lilo and Stitch in this live action remake.",
+      director: "-------------",
+      cast: ["++++", "-----", "======" ],
+      showtimes: [
+      { label: "17/06", times: ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "18/06", times: ["11:00 AM", "2:30 PM", "5:30 PM", "8:30 PM"] },
+      { label: "19/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "20/06", times: ["9:00 AM", "12:30 PM", "6:30 PM"] },
+      { label: "21/06", times: ["11:00 AM", "2:00 PM", "5:00 PM", "8:00 PM"] },
+      { label: "22/06", times: ["10:30 AM", "1:30 PM", "4:30 PM", "7:30 PM"] },
+      { label: "23/06", times: ["10:00 AM", "2:00 PM", "6:00 PM"] },
+      { label: "24/06", times: ["12:00 PM", "3:00 PM", "6:00 PM"] },
+      { label: "25/06", times: ["1:00 PM", "4:00 PM", "7:00 PM"] },
+      { label: "26/06", times: ["11:30 AM", "2:30 PM", "5:30 PM"] },
+      { label: "27/06", times: ["9:30 AM", "12:30 PM", "3:30 PM", "6:30 PM"] },
+      ]
     }
+  
   };
 
   const movie = movieData[movie_name];

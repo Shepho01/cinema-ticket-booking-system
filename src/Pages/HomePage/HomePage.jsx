@@ -68,6 +68,7 @@ const comingSoonMovieOptions = [
   {
     name: "Superman",
     poster: supermanPoster,
+    banner: supermanBanner,
     classification: mIcon,
     link: "/movies/superman",
   },

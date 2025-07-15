@@ -56,7 +56,6 @@ const BookingPage = () => {
         release_date: "17/04/2025",
         run_time: "2 hrs 17 min",
         director: "Ryan Coogler",
-        cast: ["Michael B. Jordan", "Hailee Steinfeld", "Miles Caton"],
         classification_details: "Strong horror violence, blood and gore and sex scenes",
         seats: defaultSeats.map(row => [...row])
       },
@@ -65,7 +64,6 @@ const BookingPage = () => {
         poster: spidermanPoster, // or import and use `spidermanPoster`
         classification: pgIcon,
         run_time: "2 hrs 0 min",
-        cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
         description: "Miles Morales swings across dimensions with new Spider-heroes.",
         classification_details: "Mild animated violence and coarse language",
         seats: defaultSeats.map(row => [...row])
@@ -74,7 +72,6 @@ const BookingPage = () => {
         name: "Better Man",
         poster: betterManPoster,
         classification: maIcon,
-        cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
         description: "A biographical film exploring the life of a legendary musician.",
         classification_details: "Strong coarse language and drug use",
         seats: defaultSeats.map(row => [...row])
@@ -83,7 +80,6 @@ const BookingPage = () => {
         name: "Mufasa: The Lion King",
         poster: mufasaPoster,
         classification: pgIcon,
-        cast: ["Oscar Issac", "Shameieek Moore", "Hailee Steinfeld"],
         description: "Discover the untold origin story of the king of the Pride Lands.",
         classification_details: "Mild animated violence and coarse language",
         seats: defaultSeats.map(row => [...row])
@@ -92,10 +88,45 @@ const BookingPage = () => {
         name: "The Greatest Showman",
         poster: greatestShowmanPoster,
         classification: pgIcon,
-        cast: ["Hugh Jackman", "Zac Efron", "Michelle Williams", "Zendaya"],
         description: "A musical about P.T. Barnum’s creation of show business.",
         seats: defaultSeats.map(row => [...row])
+      },
+
+      "superman": {
+        name: "Superman",
+        poster: supermanPoster,
+        classification: mIcon,
+        seats: defaultSeats.map(row => [...row])
+      },
+
+      "f1": {
+        name: "F1",
+        poster: f1Poster,
+        classification: mIcon,
+        seats: defaultSeats.map(row => [...row])
+      },
+
+      "ballerina": {
+        name: "Ballerina",
+        poster: ballerinaPoster,
+        classification: maIcon,
+        seats: defaultSeats.map(row => [...row])
+      },
+
+      "fantastic-4-first-steps": {
+        name: "Fantastic 4: First Steps",
+        poster: fantastic4Poster,
+        classification: mIcon,
+        seats: defaultSeats.map(row => [...row])
+      },
+
+      "lilo-and-stitch": {
+        name: "Lilo and Stitch",
+        poster: liloAndStitchPoster,
+        classification: pgIcon,
+        seats: defaultSeats.map(row => [...row])
       }
+      
     };
 
 
