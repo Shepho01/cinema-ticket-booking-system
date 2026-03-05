@@ -25,7 +25,6 @@ function MovieOption(props) {
                         />      
                 </Link>
             </div>
-            
         </div>
     );
 }

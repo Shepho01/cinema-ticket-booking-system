@@ -1,31 +1,24 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { Pool } =  require("pg");
+const pool = require("./db/pool");
+
+const moviesRoutes = require("./routes/movies");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// PostgreSQL connection pool 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the Cinema Ticket Booking System API" });
 });
 
-// Health check
+app.get("/data", (req, res) => {
+  res.json({ message: pool ? "Database connection pool is available" : "Database connection pool is not available" });
+});
+
 app.get("/health", (req, res) => {
   res.json({ ok: true });
-});
-
-// Database test route ← NEW
-app.get("/db-test", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT NOW()");
-    res.json({ dbTime: result.rows[0].now });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Database connection failed" });
-  }
 });
 
 const PORT = process.env.PORT || 5000;
