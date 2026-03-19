@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+/* import { useParams } from 'react-router-dom';
 
 import "./MovieInformationPage.css"
 import gIcon from "../../assets/classification/G.png";
@@ -299,3 +299,103 @@ const MovieInformationPage = () => {
 };
 
 export default MovieInformationPage;
+ */
+
+
+
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import "./MovieInformationPage.css";
+import DatePagination from "./DataPagination.jsx";
+
+// Keep these local mappings for icons/posters (recommended)
+import gIcon from "../../assets/classification/G.png";
+import pgIcon from "../../assets/classification/PG.png";
+import mIcon from "../../assets/classification/M.png";
+import maIcon from "../../assets/classification/MA.png";
+
+const classificationMap = {
+  G: gIcon,
+  PG: pgIcon,
+  M: mIcon,
+  MA: maIcon,
+  "MA15+": maIcon,
+};
+
+const MovieInformationPage = () => {
+  const { movie_name } = useParams();
+
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const res = await fetch(`http://localhost:5000/api/movies/${movie_name}`);
+        if (!res.ok) throw new Error(res.status === 404 ? "Movie not found." : "Failed to fetch movie.");
+
+        const data = await res.json();
+        setMovie(data.movie);
+      } catch (err) {
+        setError(err.message || "Something went wrong.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovie();
+  }, [movie_name]);
+
+  if (loading) return <h2>Loading...</h2>;
+  if (error) return <h2>{error}</h2>;
+  if (!movie) return <h2>Movie not found.</h2>;
+
+  const classificationIcon = classificationMap[movie.classification] || pgIcon;
+
+  return (
+    <div>
+      <div className="movie-information-page">
+        {/* poster_url recommended from backend OR keep poster_key mapping */}
+        <img src={movie.poster_url} alt={movie.name} style={{ width: "300px" }} />
+
+        <div className="movie-information-page-details">
+          <h1 className="movie-information-page-title">{movie.name}</h1>
+
+          <div className="movie-information-page-classification">
+            <img src={classificationIcon} alt={movie.name} style={{ height: "35px" }} />
+            <p>{movie.classification_details}</p>
+          </div>
+
+          <h2>Overview</h2>
+          <p className="overview">{movie.overview}</p>
+
+          <h2>Director</h2>
+          <p>{movie.director}</p>
+
+          <h2>Cast</h2>
+          <p>{(movie.cast || []).join(", ")}</p>
+        </div>
+      </div>
+
+      <div>
+        <h1 className="movie-information-page-showtimes-title">Showtimes</h1>
+        <DatePagination dateData={movie.showtimes || []} />
+      </div>
+    </div>
+  );
+};
+
+export default MovieInformationPage;
+
+
+
+
+
+
+
