@@ -20,11 +20,11 @@ function App() {
           <Route index element={<MoviesPage />} />    
         </Route>
 
-        <Route path="/movies/:movie_name" element={<Layout />}>
+        <Route path="/movies/:slug" element={<Layout />}>
           <Route index element={<MovieInformationPage />} />
         </Route>
 
-        <Route path="/tickets/:movie_name/:date/:time" element={<Layout />}>
+        <Route path="/tickets/:slug/:date/:time" element={<Layout />}>
           <Route index element={<BookingPage />} />
         </Route>
       </Routes>

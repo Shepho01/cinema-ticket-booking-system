@@ -31,7 +31,7 @@ import fantastic4Poster from "../../assets/movie-posters/fantastic4.jpg";
 import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png";
 
 const BookingPage = () => {
-  const { movie_name, date, time } = useParams();
+  const { slug, date, time } = useParams();
   const [currentSection, setCurrentSection] = useState(1);
 
 
@@ -130,7 +130,7 @@ const BookingPage = () => {
     };
 
 
-  const movie = movieData[movie_name];
+  const movie = movieData[slug];
   const [seats, setSeats] = useState(movie ? movie.seats : []); 
   const [selectedCount, setSelectedCount] = useState(0);
 

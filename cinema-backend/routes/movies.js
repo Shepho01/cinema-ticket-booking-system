@@ -13,16 +13,38 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET single movie by slug (movie_name param)
+// GET movie by ID
+/* router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { rows } = await pool.query(
+      "SELECT * FROM movies WHERE id = $1",
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Movie not found" });
+    }
+
+    res.json({
+      message: "Movie fetched successfully",
+      movie: rows[0],
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch movie" });
+  }
+}); */
+
+// GET movie by slug
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
 
-    // Adjust this query to match your table columns:
-    // If you have a "slug" column, use WHERE slug = $1
-    // If not, temporarily use WHERE name = $1 (not ideal long-term)
     const { rows } = await pool.query(
-      "SELECT * FROM movies WHERE slug = $1 LIMIT 1",
+      "SELECT * FROM movies WHERE slug = $1",
       [slug]
     );
 
@@ -30,7 +52,11 @@ router.get("/:slug", async (req, res) => {
       return res.status(404).json({ error: "Movie not found" });
     }
 
-    res.json({ movie: rows[0] });
+    res.json({
+      message: "Movie fetched successfully",
+      movie: rows[0],
+    });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch movie" });

@@ -5,7 +5,7 @@ import "./DataPagination.css";
 const DatePagination = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate(); 
-  const { movie_name } = useParams(); 
+  const { slug } = useParams(); 
 
   const handleTimeClick = (time) => {
     const selectedDate = props.dateData[activeIndex].label;
@@ -14,8 +14,8 @@ const DatePagination = (props) => {
     const encodedDate = encodeURIComponent(selectedDate);
     const encodedTime = encodeURIComponent(time);
 
-    // Navigate to /tickets/:movie_name/:date/:time
-    navigate(`/tickets/${movie_name}/${encodedDate}/${encodedTime}`);
+    // Navigate to /tickets/:slug/:date/:time
+    navigate(`/tickets/${slug}/${encodedDate}/${encodedTime}`);
   };
 
   return (

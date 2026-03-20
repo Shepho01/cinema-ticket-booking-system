@@ -22,7 +22,7 @@ app.get("/health", (req, res) => {
 });
 
 // ✅ ADD THIS
-app.use("/api/movies", moviesRoutes);
+app.use("/movies", moviesRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -27,7 +27,7 @@ import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png"
 import DatePagination from './DataPagination.jsx';
 
 const MovieInformationPage = () => {
-  const { movie_name } = useParams();
+  const { slug } = useParams();
 
   const movieData = {
     "Sinners": {
@@ -257,7 +257,7 @@ const MovieInformationPage = () => {
   
   };
 
-  const movie = movieData[movie_name];
+  const movie = movieData[slug];
 
   if (!movie) {
     return <h2>Movie not found.</h2>;
@@ -301,9 +301,17 @@ const MovieInformationPage = () => {
 export default MovieInformationPage;
  */
 
+import sinnersPoster from "../../assets/movie-posters/sinners-poster.png";
+import spidermanPoster from "../../assets/movie-posters/spiderman.png";
+import blackPantherPoster from "../../assets/movie-posters/black-panther.png";
+import greatestShowmanPoster from "../../assets/movie-posters/greatest-showman.png";
+import dunePoster from "../../assets/movie-posters/dune-part-2.png";
+import betterManPoster from "../../assets/movie-posters/better-man.png";
+import badBoysPoster from "../../assets/movie-posters/bad-boys.png";
+import toyStoryPoster from "../../assets/movie-posters/toy-story-4.png";  
+import mufasaPoster from "../../assets/movie-posters/mufasa.png"; 
 
-
-
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -325,39 +333,52 @@ const classificationMap = {
 };
 
 const MovieInformationPage = () => {
-  const { movie_name } = useParams();
+  const { slug } = useParams();
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  const fetchMovie = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-        const res = await fetch(`http://localhost:5000/api/movies/${movie_name}`);
-        if (!res.ok) throw new Error(res.status === 404 ? "Movie not found." : "Failed to fetch movie.");
+      const res = await axios.get(
+        `http://localhost:5000/movies/${slug}`
+      );
 
-        const data = await res.json();
-        setMovie(data.movie);
-      } catch (err) {
-        setError(err.message || "Something went wrong.");
-      } finally {
-        setLoading(false);
+      setMovie(res.data.movie);
+
+      
+
+    } catch (err) {
+      if (err.response) {
+        // Server responded with error (e.g. 404)
+        if (err.response.status === 404) {
+          setError("Movie not found.");
+        } else {
+          setError("Failed to fetch movie.");
+        }
+      } else {
+        // Network error
+        setError("Something went wrong.");
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchMovie();
-  }, [movie_name]);
+  fetchMovie();
+}, [slug]);
 
   if (loading) return <h2>Loading...</h2>;
   if (error) return <h2>{error}</h2>;
   if (!movie) return <h2>Movie not found.</h2>;
 
   const classificationIcon = classificationMap[movie.classification] || pgIcon;
-
+  console.log("Fetched movie data:", movie);
   return (
     <div>
       <div className="movie-information-page">
@@ -379,13 +400,13 @@ const MovieInformationPage = () => {
           <p>{movie.director}</p>
 
           <h2>Cast</h2>
-          <p>{(movie.cast || []).join(", ")}</p>
+          <p>{(movie.cast_members || []).join(", ")}</p>
         </div>
       </div>
 
       <div>
         <h1 className="movie-information-page-showtimes-title">Showtimes</h1>
-        <DatePagination dateData={movie.showtimes || []} />
+        {/* {<DatePagination dateData={movie.showtimes || []} />} */}
       </div>
     </div>
   );
