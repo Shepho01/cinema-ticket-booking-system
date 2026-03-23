@@ -147,7 +147,7 @@ const movieData = {
       name: "Superman",
       poster: supermanPoster,
       classification: mIcon,
-      classification_details: "Mild animated violence and coarse language",
+      classification_details: "Moderate violence and mild coarse language",
       description: "Superman faces the challenges in a world where hope is not valued.",
       director: "James Gunn",
       cast: ["David Corensweat", "Nicholas Hault", "Nathan Fillion" ],

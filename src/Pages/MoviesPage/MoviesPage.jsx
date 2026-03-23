@@ -83,13 +83,7 @@ const comingSoonMovieOptions = [
     poster: f1Poster,
     classification: mIcon,
     link: "/movies/f1",
-  },
-  {
-    name: "Lilo and Stitch",
-    poster: liloAndStitchPoster,
-    classification: pgIcon,
-    link: "/movies/lilo-and-stitch",
-  },
+  }
 ];
 
 
