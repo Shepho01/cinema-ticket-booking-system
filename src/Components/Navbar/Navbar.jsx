@@ -18,7 +18,9 @@ function Navbar(props) {
                     <p className="navbar-links"> MOVIES </p>
                 </Link>
 
-                <p className="navbar-links">SIGN IN</p>
+                <Link to="/sign-in">
+                    <p className="navbar-links">SIGN IN</p>
+                </Link>
             </div>
         </nav>
     </div>

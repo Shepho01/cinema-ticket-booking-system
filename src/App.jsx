@@ -8,6 +8,8 @@ import MovieInformationPage from './Pages/MovieInformationPage/MovieInformationP
 
 import BookingPage from './Pages/BookingPage/BookingPage.jsx';
 
+import SignInPage from './Pages/SignInPage/SignInPage.jsx';
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +28,10 @@ function App() {
 
         <Route path="/tickets/:slug/:date/:time" element={<Layout />}>
           <Route index element={<BookingPage />} />
+        </Route>
+
+        <Route path="/sign-in" element={<Layout />}>
+          <Route index element={<SignInPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
