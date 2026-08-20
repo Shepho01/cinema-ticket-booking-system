@@ -21,8 +21,8 @@ app.get("/health", (req, res) => {
   res.json({ ok: true });
 });
 
-// ✅ ADD THIS
-app.use("/movies", moviesRoutes);
+
+app.use("/movies", moviesRoutes);   
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
