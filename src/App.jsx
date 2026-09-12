@@ -10,6 +10,8 @@ import BookingPage from './Pages/BookingPage/BookingPage.jsx';
 
 import SignInPage from './Pages/SignInPage/SignInPage.jsx';
 
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +35,11 @@ function App() {
         <Route path="/sign-in" element={<Layout />}>
           <Route index element={<SignInPage />} />
         </Route>
+        
+        <Route path="/profile" element={<Layout />}>
+          <Route index element={<ProfilePage />} />
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );

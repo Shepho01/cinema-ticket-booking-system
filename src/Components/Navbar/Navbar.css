@@ -43,6 +43,17 @@
     color: #FFDF3E; 
 }
 
+.navbar-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.navbar-profile-icon {
+  font-size: 22px;
+}
+
 a {
     text-decoration: none;
 }

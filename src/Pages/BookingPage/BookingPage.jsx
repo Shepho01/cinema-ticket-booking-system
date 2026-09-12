@@ -211,39 +211,32 @@ const BookingPage = () => {
         <h2 className={currentSection === 4 ? 'active-step' : ''}>Confirmation</h2>
     </div>
 
-      <div className="booking-section-content">
-        {renderSection()}
-      </div>
+    <div className="booking-section-content">
+      {renderSection()}
+    </div>
 
-      <p className="selected-seats-info"><strong>Selected Seats:</strong> {selectedCount}</p>
-      
-      <div className="booking-section-navigation-buttons">
-        <button className="booking-section-navigation-back" onClick={goToPrev} disabled={currentSection === 1}>BACK</button>
+    <p className="selected-seats-info"><strong>Selected Seats:</strong> {selectedCount}</p>
     
-        <button
-          className={`booking-section-navigation-next ${
-            currentSection === 4 ||
-            selectedCount === 0 ||
-            (currentSection === 2 && totalTicketsSelected !== selectedCount)
-              ? 'disabled-button'
-              : ''
-          }`}
-          onClick={goToNext}
-          disabled={
-            currentSection === 4 ||
-            selectedCount === 0 ||
-            (currentSection === 2 && totalTicketsSelected !== selectedCount)
-          }
-        >
-          NEXT
-        </button>
-
-      </div>
-      
-      
-    
-
-  
+    <div className="booking-section-navigation-buttons">
+      <button className="booking-section-navigation-back" onClick={goToPrev} disabled={currentSection === 1}>BACK</button>
+      <button
+        className={`booking-section-navigation-next ${
+          currentSection === 4 ||
+          selectedCount === 0 ||
+          (currentSection === 2 && totalTicketsSelected !== selectedCount)
+            ? 'disabled-button'
+            : ''
+        }`}
+        onClick={goToNext}
+        disabled={
+          currentSection === 4 ||
+          selectedCount === 0 ||
+          (currentSection === 2 && totalTicketsSelected !== selectedCount)
+        }
+      >
+        NEXT
+      </button>
+    </div>
   </div>);
 };
 

@@ -1,28 +1,58 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiMenu } from "react-icons/fi"; // ✅ this line fixes the error
+import { FiMenu, FiUser } from "react-icons/fi";
 import "./Navbar.css";
-import homeIcon from "../../assets/home.png"; // Adjust the path as necessary
+import homeIcon from "../../assets/home.png";
+import { useAuth } from "../../context/AuthContext";
 
-function Navbar(props) {
+function Navbar() {
+  const { member, authLoading } = useAuth();
+
   return (
     <div>
-        <nav className="navbarcenter-mobile-menu">
+      <nav className="navbarcenter-mobile-menu">
+        <div className="navbarcenter-items">
 
-            <div className="navbarcenter-items">
-                <Link to="/">
-                    <img className="navbar-home-icon" src={homeIcon} alt="Home"/>
-                </Link> 
-            
-                <Link to="/movies">
-                    <p className="navbar-links"> MOVIES </p>
+          <Link to="/">
+            <img
+              className="navbar-home-icon"
+              src={homeIcon}
+              alt="Home"
+            />
+          </Link>
+
+          <Link to="/movies">
+            <p className="navbar-links">
+              MOVIES
+            </p>
+          </Link>
+
+          {!authLoading && (
+            <>
+              {member ? (
+                <Link
+                  to="/profile"
+                  className="navbar-profile-link"
+                >
+                  <FiUser className="navbar-profile-icon" />
+
+                  <p className="navbar-links">
+                    {member.firstName.toUpperCase()}
+                  </p>
                 </Link>
-
+                
+              ) : (
                 <Link to="/sign-in">
-                    <p className="navbar-links">SIGN IN</p>
+                  <p className="navbar-links">
+                    SIGN IN
+                  </p>
                 </Link>
-            </div>
-        </nav>
+              )}
+            </>
+          )}
+
+        </div>
+      </nav>
     </div>
   );
 }

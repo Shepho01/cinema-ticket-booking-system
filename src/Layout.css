@@ -5,7 +5,6 @@
   flex-direction: column;
   width: 100%; /* Ensures the container takes full width */
   min-height: 100vh; /* Ensures the container takes at least full viewport height */
-
 }
 
 .layout-main {
