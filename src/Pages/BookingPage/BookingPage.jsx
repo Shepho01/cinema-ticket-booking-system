@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./BookingPage.css";
 
@@ -47,28 +47,23 @@ const BookingPage = () => {
     time,
   } = useParams();
 
-  const [currentSection, setCurrentSection] =
-    useState(1);
+  const navigate = useNavigate();
 
-  const [showtime, setShowtime] =
-    useState(null);
+  const [currentSection, setCurrentSection] = useState(1);
 
-  const [seats, setSeats] =
-    useState([]);
+  const [showtime, setShowtime] = useState(null);
 
-  const [selectedSeatIds, setSelectedSeatIds] =
-    useState([]);
+  const [seats, setSeats] = useState([]);
 
-  const [
-    totalTicketsSelected,
-    setTotalTicketsSelected,
-  ] = useState(0);
+  const [selectedSeatIds, setSelectedSeatIds] = useState([]);
 
-  const [loadingSeats, setLoadingSeats] =
-    useState(true);
+  const [totalTicketsSelected, setTotalTicketsSelected] = useState(0);
 
-  const [error, setError] =
-    useState("");
+  const [loadingSeats, setLoadingSeats] = useState(true);
+
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+
+  const [error, setError] = useState("");
 
   const movieData = {
     Sinners: {
@@ -220,6 +215,13 @@ const BookingPage = () => {
       }
     );
   };
+
+  const handleConfirmPayment = async () => {
+  // POST selectedSeatIds to /bookings
+
+  // only if successful
+  navigate("/profile");
+};
 
   const goToPrev = () => {
     setCurrentSection((prev) =>
@@ -421,28 +423,32 @@ const BookingPage = () => {
 
         <button
           className={`booking-section-navigation-next ${
-            currentSection === 4 ||
             selectedCount === 0 ||
             (
               currentSection === 2 &&
-              totalTicketsSelected !==
-                selectedCount
+              totalTicketsSelected !== selectedCount
             )
               ? "disabled-button"
               : ""
           }`}
-          onClick={goToNext}
+
+          onClick={
+            currentSection === 4
+              ? handleConfirmPayment
+              : goToNext
+          }
+
           disabled={
-            currentSection === 4 ||
             selectedCount === 0 ||
             (
               currentSection === 2 &&
-              totalTicketsSelected !==
-                selectedCount
+              totalTicketsSelected !== selectedCount
             )
           }
         >
-          NEXT
+          {currentSection === 4
+            ? "CONFIRM PAYMENT"
+            : "NEXT"}
         </button>
 
       </div>

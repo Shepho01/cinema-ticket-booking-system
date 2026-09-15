@@ -1,12 +1,10 @@
 
 const ConfirmationSection = () => {
 
-    return (<div>
-
-
-
+    return (
+    
+    <div>
         <h2>Confirmation</h2>
-
     </div>);
 }
 
