@@ -150,7 +150,10 @@ const MovieInformationPage = () => {
         dates.push(dateGroup);
       }
 
-      dateGroup.times.push(showtime.start_time);
+      dateGroup.times.push({
+        id: showtime.id,
+        time: showtime.start_time,
+      });
 
       return dates;
     },

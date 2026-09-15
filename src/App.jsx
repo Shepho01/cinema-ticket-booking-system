@@ -1,16 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import HomePage from './Pages/HomePage/HomePage.jsx';
-
 import MoviesPage from './Pages/MoviesPage/MoviesPage';
-
 import MovieInformationPage from './Pages/MovieInformationPage/MovieInformationPage.jsx';
-
 import BookingPage from './Pages/BookingPage/BookingPage.jsx';
-
 import SignInPage from './Pages/SignInPage/SignInPage.jsx';
-
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 
 function App() {
   return (
@@ -28,7 +23,7 @@ function App() {
           <Route index element={<MovieInformationPage />} />
         </Route>
 
-        <Route path="/tickets/:slug/:date/:time" element={<Layout />}>
+        <Route path="/tickets/:slug/:showtimeId/:date/:time" element={<Layout />}>
           <Route index element={<BookingPage />} />
         </Route>
 

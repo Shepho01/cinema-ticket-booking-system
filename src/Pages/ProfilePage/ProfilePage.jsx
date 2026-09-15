@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
@@ -12,12 +13,12 @@ function ProfilePage() {
 
   const navigate = useNavigate();
 
+  const [activeTab, setActiveTab] = useState("watchlist");
+
   if (authLoading) {
     return (
       <div className="profile-page">
-        <p className="profile-loading">
-          Loading profile...
-        </p>
+        <p>Loading profile...</p>
       </div>
     );
   }
@@ -42,42 +43,82 @@ function ProfilePage() {
 
   return (
     <div className="profile-page">
-      <div className="profile-card">
+      <div className="profile-container">
 
-        <div className="profile-icon">
-          <FiUser />
-        </div>
-
-        <h1>MY PROFILE</h1>
-
-        <p className="profile-welcome">
-          Welcome back, {member.firstName}
-        </p>
-
-        <div className="profile-details">
-          <div className="profile-detail">
-            <span>First Name</span>
-            <strong>{member.firstName}</strong>
+        {/* PROFILE HEADER */}
+        <div className="profile-header">
+          <div className="profile-icon">
+            <FiUser />
           </div>
 
-          <div className="profile-detail">
-            <span>Last Name</span>
-            <strong>{member.lastName}</strong>
-          </div>
+          <div>
+            <h1>
+              {member.firstName} {member.lastName}
+            </h1>
 
-          <div className="profile-detail">
-            <span>Email</span>
-            <strong>{member.email}</strong>
-          </div>
-        </div>
+            <p>{member.email}</p>
 
-        <button
+            
+          </div>
+          <button
           className="profile-logout-button"
           onClick={handleLogout}
         >
           <FiLogOut />
           SIGN OUT
         </button>
+        </div>
+
+        {/* TABS */}
+        <div className="profile-tabs">
+          <button
+            className={
+              activeTab === "watchlist"
+                ? "profile-tab active"
+                : "profile-tab"
+            }
+            onClick={() => setActiveTab("watchlist")}
+          >
+            WATCHLIST
+          </button>
+
+          <button
+            className={
+              activeTab === "orders"
+                ? "profile-tab active"
+                : "profile-tab"
+            }
+            onClick={() => setActiveTab("orders")}
+          >
+            ORDERS
+          </button>
+        </div>
+
+        {/* TAB CONTENT */}
+        <div className="profile-tab-content">
+
+          {activeTab === "watchlist" && (
+            <div className="watchlist-section">
+              <h2>MY WATCHLIST</h2>
+
+              <p>
+                You haven't added any movies to your
+                watchlist yet.
+              </p>
+            </div>
+          )}
+
+          {activeTab === "orders" && (
+            <div className="orders-section">
+              <h2>MY ORDERS</h2>
+
+              <p>
+                You haven't made any bookings yet.
+              </p>
+            </div>
+          )}
+
+        </div>
 
       </div>
     </div>
