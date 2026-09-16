@@ -1,19 +1,31 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  useNavigate,
+  Link,
+} from "react-router-dom";
+
 import { useAuth } from "../../context/AuthContext.jsx";
+
 import "./SignInPage.css";
 
 
 function SignInPage() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] =
+    useState("");
 
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [password, setPassword] =
+    useState("");
+
+  const [error, setError] =
+    useState("");
+
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
 
   const { setMember } = useAuth();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,38 +52,58 @@ function SignInPage() {
         }
       );
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
       if (!response.ok) {
         throw new Error(
-          data.error || "Failed to sign in"
+          data.error ||
+          "Failed to sign in"
         );
       }
 
       setMember(data.member);
-      console.log("Signed-in member:", data.member);
+
+      console.log(
+        "Signed-in member:",
+        data.member
+      );
 
       navigate("/");
+
     } catch (err) {
+
       setError(err.message);
+
     } finally {
+
       setIsSubmitting(false);
+
     }
   };
 
+
   return (
     <div className="sign-in-page">
+
       <form
         className="sign-in-form"
         onSubmit={handleSubmit}
       >
+
         <h1>SIGN IN</h1>
 
+
         {error && (
-          <p className="sign-in-error">{error}</p>
+          <p className="sign-in-error">
+            {error}
+          </p>
         )}
 
-        <label htmlFor="email">Email:</label>
+
+        <label htmlFor="email">
+          Email:
+        </label>
 
         <input
           type="email"
@@ -80,10 +112,15 @@ function SignInPage() {
           autoComplete="email"
           required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
         />
 
-        <label htmlFor="password">Password:</label>
+
+        <label htmlFor="password">
+          Password:
+        </label>
 
         <input
           type="password"
@@ -92,18 +129,38 @@ function SignInPage() {
           autoComplete="current-password"
           required
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
+
 
         <button
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "SIGNING IN..." : "LOG IN"}
+          {isSubmitting
+            ? "SIGNING IN..."
+            : "LOG IN"}
         </button>
+
+
+        <p className="sign-up-link-text">
+          Don't have an account?{" "}
+
+          <Link
+            to="/sign-up"
+            className="sign-up-link"
+          >
+            SIGN UP
+          </Link>
+        </p>
+
       </form>
+
     </div>
   );
 }
+
 
 export default SignInPage;

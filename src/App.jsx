@@ -6,8 +6,9 @@ import MovieInformationPage from './Pages/MovieInformationPage/MovieInformationP
 import BookingPage from './Pages/BookingPage/BookingPage.jsx';
 import SignInPage from './Pages/SignInPage/SignInPage.jsx';
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import SignUpPage from "./Pages/SignUpPage/SignUpPage.jsx";
 
-function App() {
+  function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,6 +30,10 @@ function App() {
 
         <Route path="/sign-in" element={<Layout />}>
           <Route index element={<SignInPage />} />
+        </Route>
+
+        <Route path="/sign-up" element={<Layout />}>
+          <Route index element={<SignUpPage />} />
         </Route>
         
         <Route path="/profile" element={<Layout />}>
