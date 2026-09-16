@@ -1,45 +1,112 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {
+  useParams,
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  useState,
+  useEffect,
+} from "react";
+
 import "./BookingPage.css";
 
-import ConfirmationSection
-  from "../../Components/ConfirmationSection/ConfirmationSection.jsx";
-import SeatsSelection
-  from "../../Components/SeatsSelection/SeatsSelection.jsx";
-import PaymentSection
-  from "../../Components/PaymentSection/PaymentSection.jsx";
-import TicketsSection
-  from "../../Components/TicketsSection/TicketsSection.jsx";
 
+// CLASSIFICATION ICONS
+import gIcon from "../../assets/classification/G.png";
 import pgIcon from "../../assets/classification/PG.png";
 import mIcon from "../../assets/classification/M.png";
 import maIcon from "../../assets/classification/MA.png";
 
-// Now Showing Posters
+
+// BOOKING COMPONENTS
+import ConfirmationSection
+  from "../../Components/ConfirmationSection/ConfirmationSection.jsx";
+
+import SeatsSelection
+  from "../../Components/SeatsSelection/SeatsSelection.jsx";
+
+import PaymentSection
+  from "../../Components/PaymentSection/PaymentSection.jsx";
+
+import TicketsSection
+  from "../../Components/TicketsSection/TicketsSection.jsx";
+
+
+// NOW SHOWING POSTERS
 import sinnersPoster
   from "../../assets/movie-posters/sinners-poster.png";
+
 import spidermanPoster
   from "../../assets/movie-posters/spiderman.png";
+
 import greatestShowmanPoster
   from "../../assets/movie-posters/greatest-showman.png";
+
 import betterManPoster
   from "../../assets/movie-posters/better-man.png";
+
 import mufasaPoster
   from "../../assets/movie-posters/mufasa.png";
 
-// Coming Soon Posters
+
+// COMING SOON POSTERS
 import supermanPoster
   from "../../assets/movie-posters/Superman.png";
+
 import ballerinaPoster
   from "../../assets/movie-posters/ballerina.png";
+
 import f1Poster
   from "../../assets/movie-posters/F1.png";
+
 import fantastic4Poster
   from "../../assets/movie-posters/fantastic4.jpg";
+
 import liloAndStitchPoster
   from "../../assets/movie-posters/lilo-and-stitch.png";
 
+
+// MAP BACKEND POSTER KEYS TO FRONTEND ASSETS
+const posterMap = {
+  "Sinners": sinnersPoster,
+
+  "Spiderman-Across-the-Spider-Verse":
+    spidermanPoster,
+
+  "Better-Man": betterManPoster,
+
+  "The-Greatest-Showman":
+    greatestShowmanPoster,
+
+  "Mufasa-The-Lion-King":
+    mufasaPoster,
+
+  "superman": supermanPoster,
+
+  "ballerina": ballerinaPoster,
+
+  "f1": f1Poster,
+
+  "fantastic-4-first-steps":
+    fantastic4Poster,
+
+  "lilo-and-stitch":
+    liloAndStitchPoster,
+};
+
+
+// MAP BACKEND CLASSIFICATION TO ICON
+const classificationMap = {
+  G: gIcon,
+  PG: pgIcon,
+  M: mIcon,
+  MA: maIcon,
+  "MA15+": maIcon,
+};
+
+
 const BookingPage = () => {
+
   const {
     slug,
     showtimeId,
@@ -47,114 +114,135 @@ const BookingPage = () => {
     time,
   } = useParams();
 
+
   const navigate = useNavigate();
 
-  const [currentSection, setCurrentSection] = useState(1);
 
-  const [showtime, setShowtime] = useState(null);
+  // CURRENT BOOKING STEP
+  const [
+    currentSection,
+    setCurrentSection,
+  ] = useState(1);
 
-  const [seats, setSeats] = useState([]);
 
-  const [selectedSeatIds, setSelectedSeatIds] = useState([]);
+  // MOVIE
+  const [
+    movie,
+    setMovie,
+  ] = useState(null);
 
-  const [totalTicketsSelected, setTotalTicketsSelected] = useState(0);
+  const [
+    loadingMovie,
+    setLoadingMovie,
+  ] = useState(true);
 
-  const [loadingSeats, setLoadingSeats] = useState(true);
 
-  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  // SHOWTIME
+  const [
+    showtime,
+    setShowtime,
+  ] = useState(null);
 
-  const [error, setError] = useState("");
 
-  const movieData = {
-    Sinners: {
-      name: "Sinners",
-      poster: sinnersPoster,
-      classification: maIcon,
-      overview:
-        "Trying to leave their troubled lives behind, twin brothers (Michael B. Jordan) return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.",
-      release_date: "17/04/2025",
-      run_time: "2 hrs 17 min",
-      director: "Ryan Coogler",
-      classification_details:
-        "Strong horror violence, blood and gore and sex scenes",
-    },
+  // SEATS
+  const [
+    seats,
+    setSeats,
+  ] = useState([]);
 
-    "Spiderman-Across-the-Spider-Verse": {
-      name: "Spiderman Across the Spider-Verse",
-      poster: spidermanPoster,
-      classification: pgIcon,
-      run_time: "2 hrs 0 min",
-      description:
-        "Miles Morales swings across dimensions with new Spider-heroes.",
-      classification_details:
-        "Mild animated violence and coarse language",
-    },
+  const [
+    selectedSeatIds,
+    setSelectedSeatIds,
+  ] = useState([]);
 
-    "Better-Man": {
-      name: "Better Man",
-      poster: betterManPoster,
-      classification: maIcon,
-      description:
-        "A biographical film exploring the life of a legendary musician.",
-      classification_details:
-        "Strong coarse language and drug use",
-    },
+  const [
+    loadingSeats,
+    setLoadingSeats,
+  ] = useState(true);
 
-    "Mufasa-The-Lion-King": {
-      name: "Mufasa: The Lion King",
-      poster: mufasaPoster,
-      classification: pgIcon,
-      description:
-        "Discover the untold origin story of the king of the Pride Lands.",
-      classification_details:
-        "Mild animated violence and coarse language",
-    },
 
-    "The-Greatest-Showman": {
-      name: "The Greatest Showman",
-      poster: greatestShowmanPoster,
-      classification: pgIcon,
-      description:
-        "A musical about P.T. Barnum’s creation of show business.",
-    },
+  // TICKETS
+  const [
+    totalTicketsSelected,
+    setTotalTicketsSelected,
+  ] = useState(0);
 
-    superman: {
-      name: "Superman",
-      poster: supermanPoster,
-      classification: mIcon,
-    },
 
-    f1: {
-      name: "F1",
-      poster: f1Poster,
-      classification: mIcon,
-    },
+  // ERROR
+  const [
+    error,
+    setError,
+  ] = useState("");
 
-    ballerina: {
-      name: "Ballerina",
-      poster: ballerinaPoster,
-      classification: maIcon,
-    },
 
-    "fantastic-4-first-steps": {
-      name: "Fantastic 4: First Steps",
-      poster: fantastic4Poster,
-      classification: mIcon,
-    },
+  const [bookingLoading, setBookingLoading] = useState(false);
 
-    "lilo-and-stitch": {
-      name: "Lilo and Stitch",
-      poster: liloAndStitchPoster,
-      classification: pgIcon,
-    },
-  };
+  const [bookingError, setBookingError] = useState("");
 
-  const movie = movieData[slug];
 
-  // Fetch real seats from backend
+
+  // =========================================================
+  // FETCH MOVIE INFORMATION
+  // =========================================================
+
   useEffect(() => {
+
+    const fetchMovie = async () => {
+      try {
+
+        setLoadingMovie(true);
+        setError("");
+
+        const response = await fetch(
+          `http://localhost:5000/movies/${slug}`
+        );
+
+        const data =
+          await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.error ||
+            "Failed to fetch movie"
+          );
+        }
+
+        setMovie(data.movie);
+
+      } catch (err) {
+
+        console.error(
+          "Failed to fetch movie:",
+          err
+        );
+
+        setError(err.message);
+
+      } finally {
+
+        setLoadingMovie(false);
+
+      }
+    };
+
+
+    if (slug) {
+      fetchMovie();
+    }
+
+  }, [slug]);
+
+
+
+  // =========================================================
+  // FETCH SHOWTIME + SEAT AVAILABILITY
+  // =========================================================
+
+  useEffect(() => {
+
     const fetchSeats = async () => {
       try {
+
         setLoadingSeats(true);
         setError("");
 
@@ -162,7 +250,8 @@ const BookingPage = () => {
           `http://localhost:5000/showtimes/${showtimeId}/seats`
         );
 
-        const data = await response.json();
+        const data =
+          await response.json();
 
         if (!response.ok) {
           throw new Error(
@@ -171,33 +260,54 @@ const BookingPage = () => {
           );
         }
 
-        setShowtime(data.showtime);
-        setSeats(data.seats);
+        setShowtime(
+          data.showtime
+        );
+
+        setSeats(
+          data.seats
+        );
+
       } catch (err) {
+
         console.error(
           "Failed to fetch seats:",
           err
         );
 
         setError(err.message);
+
       } finally {
+
         setLoadingSeats(false);
+
       }
     };
+
 
     if (showtimeId) {
       fetchSeats();
     }
+
   }, [showtimeId]);
 
-  // Number of seats currently selected
+
+
+  // =========================================================
+  // SELECTED SEATS
+  // =========================================================
+
   const selectedCount =
     selectedSeatIds.length;
 
-  // Select / deselect a seat
+
   const handleSelect = (seatId) => {
+
     setSelectedSeatIds(
       (currentSelectedSeats) => {
+
+        // If seat is already selected,
+        // remove it
         if (
           currentSelectedSeats.includes(
             seatId
@@ -208,151 +318,348 @@ const BookingPage = () => {
           );
         }
 
+
+        // Otherwise add it
         return [
           ...currentSelectedSeats,
           seatId,
         ];
+
       }
     );
   };
 
-  const handleConfirmPayment = async () => {
-  // POST selectedSeatIds to /bookings
 
-  // only if successful
-  navigate("/profile");
-};
+
+  // =========================================================
+  // CONFIRM PAYMENT
+  // =========================================================
+
+  const handleConfirmPayment = async () => {
+    if (selectedSeatIds.length === 0) {
+      setBookingError(
+        "Please select at least one seat."
+      );
+      return;
+    }
+
+    try {
+      setBookingLoading(true);
+      setBookingError("");
+
+      const response = await fetch(
+        "http://localhost:5000/bookings",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          credentials: "include",
+
+          body: JSON.stringify({
+            showtimeId: Number(showtimeId),
+            seatIds: selectedSeatIds,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error ||
+          "Failed to create booking"
+        );
+      }
+
+      console.log(
+        "Booking created successfully:",
+        data.booking
+      );
+
+      navigate("/profile");
+
+    } catch (err) {
+      console.error(
+        "Failed to create booking:",
+        err
+      );
+
+      setBookingError(err.message);
+
+    } finally {
+      setBookingLoading(false);
+    }
+  };
+
+
+
+  // =========================================================
+  // BOOKING PAGE NAVIGATION
+  // =========================================================
 
   const goToPrev = () => {
-    setCurrentSection((prev) =>
-      Math.max(prev - 1, 1)
+
+    setCurrentSection(
+      (prev) =>
+        Math.max(
+          prev - 1,
+          1
+        )
     );
+
   };
+
 
   const goToNext = () => {
-    setCurrentSection((prev) =>
-      Math.min(prev + 1, 4)
+
+    setCurrentSection(
+      (prev) =>
+        Math.min(
+          prev + 1,
+          4
+        )
     );
+
   };
 
-  const renderSection = () => {
-    switch (currentSection) {
-      case 1:
-        if (loadingSeats) {
-          return <p>Loading seats...</p>;
-        }
 
+
+  // =========================================================
+  // RENDER CURRENT BOOKING STEP
+  // =========================================================
+
+  const renderSection = () => {
+
+    switch (currentSection) {
+
+      // SEATS
+      case 1:
         return (
           <SeatsSelection
             seats={seats}
             selectedSeatIds={
               selectedSeatIds
             }
-            onSelect={handleSelect}
+            onSelect={
+              handleSelect
+            }
           />
         );
 
+
+      // TICKETS
       case 2:
         return (
           <TicketsSection
             setTotalTicketsSelected={
               setTotalTicketsSelected
             }
-            selectedCount={selectedCount}
+            selectedCount={
+              selectedCount
+            }
           />
         );
 
-      case 3:
-        return <PaymentSection />;
 
+      // PAYMENT
+      case 3:
+        return (
+          <PaymentSection />
+        );
+
+
+      // CONFIRMATION
       case 4:
         return (
           <ConfirmationSection />
         );
 
+
       default:
         return null;
     }
+
   };
 
-  if (!movie) {
-    return <h2>Movie not found.</h2>;
+
+
+  // =========================================================
+  // LOADING / ERROR CHECKS
+  //
+  // IMPORTANT:
+  // These come AFTER all hooks.
+  // =========================================================
+
+  if (
+    loadingMovie ||
+    loadingSeats
+  ) {
+    return (
+      <h2>
+        Loading booking...
+      </h2>
+    );
   }
 
-  if (error && !showtime) {
+
+  if (error) {
     return (
       <div className="booking-page-container">
-        <p>{error}</p>
+        <p>
+          {error}
+        </p>
       </div>
     );
   }
 
+
+  if (!movie) {
+    return (
+      <h2>
+        Movie not found.
+      </h2>
+    );
+  }
+
+
+  if (!showtime) {
+    return (
+      <h2>
+        Showtime not found.
+      </h2>
+    );
+  }
+
+
+
+  // =========================================================
+  // IMAGE LOOKUPS
+  //
+  // Safe here because movie is no longer null.
+  // =========================================================
+
+  const moviePoster =
+    posterMap[movie.slug];
+
+
+  const classificationIcon =
+    classificationMap[
+      movie.classification
+    ];
+
+
+
+  // =========================================================
+  // MAIN PAGE
+  // =========================================================
+
   return (
     <div className="booking-page-container">
+
+
+      {/* MOVIE / SHOWTIME INFORMATION */}
 
       <div className="booking-information-page">
 
         <img
-          src={movie.poster}
+          src={moviePoster}
           alt={movie.name}
-          style={{ width: "215px" }}
+          style={{
+            width: "215px",
+          }}
         />
 
+
         <div className="booking-information-page-details">
+
 
           <h1 className="booking-information-page-title">
             {movie.name}
           </h1>
 
+
           <div className="booking-information-page-classification">
 
-            <img
-              src={movie.classification}
-              alt={movie.name}
-              style={{ height: "30px" }}
-            />
+            {classificationIcon && (
+              <img
+                src={classificationIcon}
+                alt={
+                  movie.classification
+                }
+                style={{
+                  height: "30px",
+                }}
+              />
+            )}
+
 
             <p>
-              {movie.classification_details}
+              {
+                movie.classification_details
+              }
             </p>
 
           </div>
 
+
           <div className="booking-information-page-classification">
 
             <p>
-              <strong>Date:</strong>{" "}
-              {decodeURIComponent(date)}
+              <strong>
+                Date:
+              </strong>{" "}
+              {
+                decodeURIComponent(
+                  date
+                )
+              }
             </p>
+
 
             <p>
-              <strong>Time:</strong>{" "}
-              {decodeURIComponent(time)}
+              <strong>
+                Time:
+              </strong>{" "}
+              {
+                decodeURIComponent(
+                  time
+                )
+              }
             </p>
 
-            {showtime && (
-              <>
-                <p>
-                  <strong>
-                    Screen:
-                  </strong>{" "}
-                  {showtime.screenId}
-                </p>
 
-                <p>
-                  <strong>
-                    Price:
-                  </strong>{" "}
-                  ${showtime.ticketPrice}
-                </p>
-              </>
-            )}
+            <p>
+              <strong>
+                Screen:
+              </strong>{" "}
+              {
+                showtime.screenId
+              }
+            </p>
+
+
+            <p>
+              <strong>
+                Price:
+              </strong>{" "}
+              $
+              {
+                showtime.ticketPrice
+              }
+            </p>
 
           </div>
 
         </div>
 
       </div>
+
+
+
+      {/* BOOKING STEP NAVIGATION */}
 
       <div className="booking-section-navigation">
 
@@ -366,6 +673,7 @@ const BookingPage = () => {
           Seats
         </h2>
 
+
         <h2
           className={
             currentSection === 2
@@ -376,6 +684,7 @@ const BookingPage = () => {
           Tickets
         </h2>
 
+
         <h2
           className={
             currentSection === 3
@@ -385,6 +694,7 @@ const BookingPage = () => {
         >
           Payment
         </h2>
+
 
         <h2
           className={
@@ -398,10 +708,16 @@ const BookingPage = () => {
 
       </div>
 
+
+
+      {/* CURRENT BOOKING SECTION */}
       <div className="booking-section-content">
         {renderSection()}
       </div>
 
+
+
+      {/* SELECTED SEAT COUNT */}
       <p className="selected-seats-info">
         <strong>
           Selected Seats:
@@ -409,11 +725,16 @@ const BookingPage = () => {
         {selectedCount}
       </p>
 
+      {/* BACK / NEXT BUTTONS */}
       <div className="booking-section-navigation-buttons">
 
         <button
           className="booking-section-navigation-back"
-          onClick={goToPrev}
+
+          onClick={
+            goToPrev
+          }
+
           disabled={
             currentSection === 1
           }
@@ -424,6 +745,7 @@ const BookingPage = () => {
         <button
           className={`booking-section-navigation-next ${
             selectedCount === 0 ||
+            bookingLoading ||
             (
               currentSection === 2 &&
               totalTicketsSelected !== selectedCount
@@ -440,6 +762,7 @@ const BookingPage = () => {
 
           disabled={
             selectedCount === 0 ||
+            bookingLoading ||
             (
               currentSection === 2 &&
               totalTicketsSelected !== selectedCount
@@ -447,14 +770,19 @@ const BookingPage = () => {
           }
         >
           {currentSection === 4
-            ? "CONFIRM PAYMENT"
+            ? bookingLoading
+              ? "PROCESSING..."
+              : "CONFIRM PAYMENT"
             : "NEXT"}
         </button>
 
+
       </div>
+
 
     </div>
   );
 };
+
 
 export default BookingPage;

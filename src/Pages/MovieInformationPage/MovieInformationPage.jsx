@@ -28,10 +28,9 @@ import mIcon from "../../assets/classification/M.png";
 import maIcon from "../../assets/classification/MA.png";
 
 const classificationMap = {
-  G: gIcon,
-  PG: pgIcon,
-  M: mIcon,
-  MA: maIcon,
+  "G": gIcon,
+  "PG": pgIcon,
+  "M": mIcon,
   "MA15+": maIcon,
 };
 
@@ -130,8 +129,7 @@ const MovieInformationPage = () => {
     return <h2>Movie not found.</h2>;
   }
 
-  const classificationIcon =
-    classificationMap[movie.classification] || pgIcon;
+  const classificationIcon = classificationMap[movie.classification];
 
   // Convert the API's flat showtime list into the structure
   // expected by DatePagination.

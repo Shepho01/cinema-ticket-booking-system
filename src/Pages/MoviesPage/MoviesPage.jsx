@@ -30,10 +30,9 @@ const posterMap = {
 };
 
 const classificationMap = {
-  G: gIcon,
-  PG: pgIcon,
-  M: mIcon,
-  MA: maIcon,
+  "G": gIcon,
+  "PG": pgIcon,
+  "M": mIcon,
   "MA15+": maIcon,
 };
 
