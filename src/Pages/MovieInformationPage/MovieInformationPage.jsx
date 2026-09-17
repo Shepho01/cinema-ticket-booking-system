@@ -16,7 +16,8 @@ import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png"
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 import "./MovieInformationPage.css";
 import DatePagination from "./DataPagination.jsx";
@@ -82,6 +83,58 @@ const MovieInformationPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+  const { member } = useAuth();
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const [watchlistLoading, setWatchlistLoading] = useState(false);
+  const [watchlistError, setWatchlistError] = useState("");
+
+  useEffect(() => {
+    const checkWatchlist = async () => {
+      if (!member || !movie) {
+        setIsInWatchlist(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "http://localhost:5000/watchlist",
+          {
+            credentials: "include",
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.error ||
+            "Failed to fetch watchlist"
+          );
+        }
+
+        const movieAlreadySaved =
+          data.watchlist.some(
+            (item) =>
+              item.movieId === movie.id
+          );
+
+        setIsInWatchlist(
+          movieAlreadySaved
+        );
+
+      } catch (err) {
+        console.error(
+          "Failed to check watchlist:",
+          err
+        );
+      }
+    };
+
+    checkWatchlist();
+
+  }, [member, movie]);
+
   useEffect(() => {
     const fetchMovieInformation = async () => {
       try {
@@ -128,6 +181,56 @@ const MovieInformationPage = () => {
   if (!movie) {
     return <h2>Movie not found.</h2>;
   }
+
+  const handleWatchlist = async () => {
+    if (!member) {
+      navigate("/sign-in");
+      return;
+    }
+
+    try {
+      setWatchlistLoading(true);
+      setWatchlistError("");
+
+      const response = await fetch(
+        `http://localhost:5000/watchlist/${movie.id}`,
+        {
+          method:
+            isInWatchlist
+              ? "DELETE"
+              : "POST",
+
+          credentials: "include",
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error ||
+          "Failed to update watchlist"
+        );
+      }
+
+      setIsInWatchlist(
+        !isInWatchlist
+      );
+
+    } catch (err) {
+      console.error(
+        "Watchlist update failed:",
+        err
+      );
+
+      setWatchlistError(
+        err.message
+      );
+
+    } finally {
+      setWatchlistLoading(false);
+    }
+  };
 
   const classificationIcon = classificationMap[movie.classification];
 
@@ -191,6 +294,24 @@ const MovieInformationPage = () => {
           <h2>Cast</h2>
           <p>{(movie.cast_members || []).join(", ")}</p>
         </div>
+
+        <button
+          className="watchlist-button"
+          onClick={handleWatchlist}
+          disabled={watchlistLoading}
+        >
+          {watchlistLoading
+            ? "UPDATING..."
+            : isInWatchlist
+              ? "REMOVE FROM WATCHLIST"
+              : "ADD TO WATCHLIST"}
+        </button>
+
+        {watchlistError && (
+            <p className="watchlist-error">
+              {watchlistError}
+            </p>
+          )}
       </div>
 
       <div>

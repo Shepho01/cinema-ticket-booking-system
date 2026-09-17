@@ -9,6 +9,7 @@ const pool = require("./db/pool");
 const moviesRoutes = require("./routes/movies");
 const bookingRoutes = require("./routes/bookings");
 const showtimesRoutes = require("./routes/showtimes");
+const watchlistRoutes = require("./routes/watchlist");
 const authRoutes = require("./routes/auth");
 
 const app = express();
@@ -51,6 +52,7 @@ app.get("/health", (req, res) => {
 
 // API routes
 app.use("/movies", moviesRoutes);
+app.use("/watchlist", watchlistRoutes);
 app.use("/auth", authRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/showtimes", showtimesRoutes);

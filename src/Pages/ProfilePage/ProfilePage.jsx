@@ -16,6 +16,7 @@ import {
 import { useAuth } from "../../context/AuthContext";
 
 import OrderCard from "../../Components/OrderCard/OrderCard.jsx";
+import WatchlistCard from "../../Components/WatchlistCard/WatchlistCard.jsx";
 
 import "./ProfilePage.css";
 
@@ -50,6 +51,17 @@ function ProfilePage() {
     setBookingsError,
   ] = useState("");
 
+  // =========================================================
+  // Watchlist State
+  // =========================================================
+
+  const [watchlist, setWatchlist] = useState([]);
+
+  const [watchlistLoading, setWatchlistLoading] = useState(false);
+
+  const [watchlistError, setWatchlistError] = useState("");
+
+  
 
   // =========================================================
   // FETCH MEMBER BOOKINGS
@@ -118,6 +130,58 @@ function ProfilePage() {
   }, [member, activeTab]);
 
 
+
+  useEffect(() => {
+    const fetchWatchlist = async () => {
+      try {
+        setWatchlistLoading(true);
+        setWatchlistError("");
+
+        const response = await fetch(
+          "http://localhost:5000/watchlist",
+          {
+            credentials: "include",
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.error ||
+            "Failed to fetch watchlist"
+          );
+        }
+
+        setWatchlist(
+          data.watchlist || []
+        );
+
+      } catch (err) {
+        console.error(
+          "Failed to fetch watchlist:",
+          err
+        );
+
+        setWatchlistError(
+          err.message
+        );
+
+      } finally {
+        setWatchlistLoading(false);
+      }
+    };
+
+    if (
+      member &&
+      activeTab === "watchlist"
+    ) {
+      fetchWatchlist();
+    }
+
+  }, [member, activeTab]);
+
+
   // =========================================================
   // AUTH LOADING
   // =========================================================
@@ -168,6 +232,15 @@ function ProfilePage() {
 
     }
 
+  };
+
+  const handleWatchlistRemove = (movieId) => {
+    setWatchlist((currentWatchlist) =>
+      currentWatchlist.filter(
+        (movie) =>
+          movie.movieId !== movieId
+      )
+    );
   };
 
 
@@ -334,20 +407,40 @@ function ProfilePage() {
           {/* WATCHLIST */}
 
           {activeTab === "watchlist" && (
-
             <div className="watchlist-section">
 
-              <h2>
-                MY WATCHLIST
-              </h2>
+              <h2>MY WATCHLIST</h2>
 
-              <p>
-                You haven't added any movies
-                to your watchlist yet.
-              </p>
+              {watchlistLoading && (
+                <p>Loading watchlist...</p>
+              )}
+
+              {watchlistError && (
+                <p className="watchlist-error">
+                  {watchlistError}
+                </p>
+              )}
+
+              {!watchlistLoading &&
+                !watchlistError &&
+                watchlist.length === 0 && (
+                  <p>
+                    You haven't added any movies to
+                    your watchlist yet.
+                  </p>
+                )}
+
+              {!watchlistLoading &&
+                !watchlistError &&
+                watchlist.map((movie) => (
+                  <WatchlistCard
+                    key={movie.watchlistId}
+                    movie={movie}
+                    onRemove={handleWatchlistRemove}
+                  />
+                ))}
 
             </div>
-
           )}
 
         </div>
