@@ -243,6 +243,44 @@ function ProfilePage() {
     );
   };
 
+  const handleBookingCancel = async (bookingId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/bookings/${bookingId}/cancel`,
+        {
+          method: "PATCH",
+          credentials: "include",
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error ||
+          "Failed to cancel booking"
+        );
+      }
+
+      setBookings((currentBookings) =>
+        currentBookings.map((booking) =>
+          booking.bookingId === bookingId
+            ? {
+                ...booking,
+                status: "cancelled",
+              }
+            : booking
+        )
+      );
+
+    } catch (err) {
+      console.error(
+        "Failed to cancel booking:",
+        err
+      );
+    }
+  };
+
 
   return (
     <div className="profile-page">
@@ -391,6 +429,7 @@ function ProfilePage() {
                       <OrderCard
                         key={booking.bookingId}
                         booking={booking}
+                        onCancel={handleBookingCancel}
                       />
                     ))}
 

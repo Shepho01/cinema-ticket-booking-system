@@ -111,3 +111,19 @@
     gap: 15px;
   }
 }
+
+.order-cancel-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+
+  background-color: #b42318;
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+  }
+
+  .order-cancel-button:hover {
+  background-color: #941b13;
+}

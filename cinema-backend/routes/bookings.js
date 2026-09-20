@@ -486,4 +486,228 @@ router.post("/", requireAuth, async (req, res) => {
   }
 });
 
+
+
+
+router.get("/debug/booking-seats", async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      `
+      SELECT
+        bs.id AS "bookingSeatId",
+        bs.booking_id AS "bookingId",
+        bs.showtime_id AS "showtimeId",
+        bs.seat_id AS "seatId",
+
+        s.seat_label AS "seatLabel",
+
+        b.status,
+
+        m.name AS "movieName",
+
+        sh.starts_at AS "startsAt"
+
+      FROM booking_seats bs
+
+      JOIN bookings b
+        ON b.id = bs.booking_id
+
+      JOIN seats s
+        ON s.id = bs.seat_id
+
+      JOIN showtimes sh
+        ON sh.id = bs.showtime_id
+
+      JOIN movies m
+        ON m.id = sh.movie_id
+
+      ORDER BY
+        bs.booking_id,
+        s.seat_row,
+        s.seat_number
+      `
+    );
+
+    res.json({
+      bookingSeats: rows,
+    });
+
+  } catch (err) {
+    console.error(
+      "Failed to fetch booking seats:",
+      err
+    );
+
+    res.status(500).json({
+      error: "Failed to fetch booking seats",
+    });
+  }
+});
+
+
+// DEBUG: GET BOOKINGS + SEATS FOR A SPECIFIC SHOWTIME
+router.get(
+  "/debug/booking-seats/showtime/:showtimeId",
+  async (req, res) => {
+    try {
+      const showtimeId =
+        Number(req.params.showtimeId);
+
+      if (!Number.isInteger(showtimeId)) {
+        return res.status(400).json({
+          error:
+            "Showtime ID must be a valid integer",
+        });
+      }
+
+      const { rows } = await pool.query(
+        `
+        SELECT
+          b.id AS "bookingId",
+          b.member_id AS "memberId",
+          b.status,
+          b.total_price AS "totalPrice",
+
+          bs.id AS "bookingSeatId",
+          bs.showtime_id AS "showtimeId",
+
+          s.id AS "seatId",
+          s.seat_label AS "seatLabel",
+          s.seat_row AS "seatRow",
+          s.seat_number AS "seatNumber",
+
+          m.name AS "movieName",
+
+          sh.starts_at AS "startsAt"
+
+        FROM booking_seats bs
+
+        JOIN bookings b
+          ON b.id = bs.booking_id
+
+        JOIN seats s
+          ON s.id = bs.seat_id
+
+        JOIN showtimes sh
+          ON sh.id = bs.showtime_id
+
+        JOIN movies m
+          ON m.id = sh.movie_id
+
+        WHERE bs.showtime_id = $1
+
+        ORDER BY
+          b.id,
+          s.seat_row,
+          s.seat_number
+        `,
+        [showtimeId]
+      );
+
+      res.json({
+        showtimeId,
+        bookingSeats: rows,
+      });
+
+    } catch (err) {
+      console.error(
+        "Failed to fetch booking seats for showtime:",
+        err
+      );
+
+      res.status(500).json({
+        error:
+          "Failed to fetch booking seats for showtime",
+      });
+    }
+  }
+);
+
+// CANCEL A BOOKING
+router.patch(
+  "/:id/cancel",
+  requireAuth,
+  async (req, res) => {
+    try {
+      const bookingId = Number(req.params.id);
+
+      if (!Number.isInteger(bookingId)) {
+        return res.status(400).json({
+          error: "Booking ID must be a valid integer",
+        });
+      }
+
+      // Check that the booking exists
+      // AND belongs to the logged-in member
+      const bookingResult = await pool.query(
+        `
+        SELECT
+          id,
+          member_id AS "memberId",
+          status
+        FROM bookings
+        WHERE id = $1
+          AND member_id = $2
+        `,
+        [
+          bookingId,
+          req.memberId,
+        ]
+      );
+
+      if (bookingResult.rows.length === 0) {
+        return res.status(404).json({
+          error: "Booking not found",
+        });
+      }
+
+      const booking = bookingResult.rows[0];
+
+      // Prevent cancelling the same booking twice
+      if (booking.status === "cancelled") {
+        return res.status(409).json({
+          error: "Booking is already cancelled",
+        });
+      }
+
+      // Update the booking status
+      const { rows } = await pool.query(
+        `
+        UPDATE bookings
+
+        SET status = 'cancelled'
+
+        WHERE id = $1
+          AND member_id = $2
+
+        RETURNING
+          id AS "bookingId",
+          status
+        `,
+        [
+          bookingId,
+          req.memberId,
+        ]
+      );
+
+      res.json({
+        message: "Booking cancelled successfully",
+        booking: rows[0],
+      });
+
+    } catch (err) {
+      console.error(
+        "Failed to cancel booking:",
+        err
+      );
+
+      res.status(500).json({
+        error: "Failed to cancel booking",
+      });
+    }
+  }
+);
+
+
+
 module.exports = router;
