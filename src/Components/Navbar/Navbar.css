@@ -10,7 +10,7 @@
     justify-content: center; /* Center the inner container */
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    gap: 80px; /* Adjust spacing between items here */
+    
 }
 
 /* Center navbar items */
@@ -20,7 +20,7 @@
     margin: 5px 25px;
     font-size: 22px;
     font-family: "AvenirRegular";
-    gap: 30vw;
+    gap: 16vw;
 }
 
 

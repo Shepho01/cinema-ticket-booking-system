@@ -27,6 +27,12 @@ function Navbar() {
             </p>
           </Link>
 
+          <Link to="/ai">
+            <p className="navbar-links">
+              AI Chatbot
+            </p>
+          </Link>
+
           {!authLoading && (
             <>
               {member ? (
