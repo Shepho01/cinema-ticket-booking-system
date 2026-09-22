@@ -1,0 +1,199 @@
+.ai-page {
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+
+.ai-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+
+/* HEADING */
+
+.ai-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+.ai-label {
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+
+.ai-heading h1 {
+  margin: 0 0 16px;
+
+  font-size: 42px;
+}
+
+
+.ai-description {
+  max-width: 650px;
+  margin: 0 auto;
+
+  line-height: 1.6;
+
+  color: #faf5f5;
+}
+
+
+/* FORM */
+
+.ai-form {
+  padding: 32px;
+
+  background: #121B26;
+
+  border-radius: 12px;
+}
+
+
+.ai-form-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+.ai-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 16px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  resize: vertical;
+
+  font-family: inherit;
+  font-size: 16px;
+
+  outline: none;
+}
+
+
+.ai-input:focus {
+  border-color: #222;
+}
+
+
+/* QUICK EXAMPLES */
+
+.ai-examples {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+
+.ai-examples span {
+  font-size: 14px;
+
+  color: #666;
+}
+
+
+.ai-examples button {
+  padding: 7px 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 20px;
+
+  background: rgb(71, 67, 142);
+
+  cursor: pointer;
+}
+
+
+.ai-examples button:hover {
+  background: rgb(104, 99, 181);
+}
+
+
+/* SUBMIT BUTTON */
+
+.ai-submit {
+  width: 100%;
+
+  margin-top: 25px;
+  padding: 14px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: #FFDF3E;
+  color: black;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.ai-submit:hover:not(:disabled) {
+  background: rgb(255, 213, 0);
+}
+
+
+.ai-submit:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* ERROR */
+
+.ai-error {
+  margin-top: 18px;
+
+  color: #b42318;
+}
+
+
+/* AI RESULT */
+
+.ai-result {
+  margin-top: 30px;
+  padding: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+}
+
+
+.ai-result-label {
+  margin-top: 0;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+.ai-response {
+  margin-top: 18px;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+}

@@ -11,6 +11,7 @@ const bookingRoutes = require("./routes/bookings");
 const showtimesRoutes = require("./routes/showtimes");
 const watchlistRoutes = require("./routes/watchlist");
 const authRoutes = require("./routes/auth");
+const aiRoutes = require("./routes/ai");
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use("/watchlist", watchlistRoutes);
 app.use("/auth", authRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/showtimes", showtimesRoutes);
+app.use("/ai", aiRoutes);
 
 const PORT = process.env.PORT || 5000;
 
