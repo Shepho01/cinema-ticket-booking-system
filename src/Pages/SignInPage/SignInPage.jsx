@@ -12,20 +12,11 @@ import "./SignInPage.css";
 function SignInPage() {
   const navigate = useNavigate();
 
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const [error, setError] =
-    useState("");
-
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { setMember } = useAuth();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -19,79 +19,40 @@ import maIcon from "../../assets/classification/MA.png";
 
 
 // BOOKING COMPONENTS
-import ConfirmationSection
-  from "../../Components/ConfirmationSection/ConfirmationSection.jsx";
-
-import SeatsSelection
-  from "../../Components/SeatsSelection/SeatsSelection.jsx";
-
-import PaymentSection
-  from "../../Components/PaymentSection/PaymentSection.jsx";
-
-import TicketsSection
-  from "../../Components/TicketsSection/TicketsSection.jsx";
+import ConfirmationSection from "../../Components/ConfirmationSection/ConfirmationSection.jsx";
+import SeatsSelection from "../../Components/SeatsSelection/SeatsSelection.jsx";
+import PaymentSection from "../../Components/PaymentSection/PaymentSection.jsx";
+import TicketsSection from "../../Components/TicketsSection/TicketsSection.jsx";
 
 
 // NOW SHOWING POSTERS
-import sinnersPoster
-  from "../../assets/movie-posters/sinners-poster.png";
-
-import spidermanPoster
-  from "../../assets/movie-posters/spiderman.png";
-
-import greatestShowmanPoster
-  from "../../assets/movie-posters/greatest-showman.png";
-
-import betterManPoster
-  from "../../assets/movie-posters/better-man.png";
-
-import mufasaPoster
-  from "../../assets/movie-posters/mufasa.png";
+import sinnersPoster from "../../assets/movie-posters/sinners-poster.png";
+import spidermanPoster from "../../assets/movie-posters/spiderman.png";
+import greatestShowmanPoster from "../../assets/movie-posters/greatest-showman.png";
+import betterManPoster from "../../assets/movie-posters/better-man.png";
+import mufasaPoster from "../../assets/movie-posters/mufasa.png";
 
 
 // COMING SOON POSTERS
-import supermanPoster
-  from "../../assets/movie-posters/Superman.png";
-
-import ballerinaPoster
-  from "../../assets/movie-posters/ballerina.png";
-
-import f1Poster
-  from "../../assets/movie-posters/F1.png";
-
-import fantastic4Poster
-  from "../../assets/movie-posters/fantastic4.jpg";
-
-import liloAndStitchPoster
-  from "../../assets/movie-posters/lilo-and-stitch.png";
+import supermanPoster from "../../assets/movie-posters/Superman.png";
+import ballerinaPoster from "../../assets/movie-posters/ballerina.png";
+import f1Poster from "../../assets/movie-posters/F1.png";
+import fantastic4Poster from "../../assets/movie-posters/fantastic4.jpg";
+import liloAndStitchPoster from "../../assets/movie-posters/lilo-and-stitch.png";
 
 
 // MAP BACKEND POSTER KEYS TO FRONTEND ASSETS
 const posterMap = {
   "Sinners": sinnersPoster,
-
-  "Spiderman-Across-the-Spider-Verse":
-    spidermanPoster,
-
+  "Spiderman-Across-the-Spider-Verse": spidermanPoster,
   "Better-Man": betterManPoster,
-
-  "The-Greatest-Showman":
-    greatestShowmanPoster,
-
-  "Mufasa-The-Lion-King":
-    mufasaPoster,
-
+  "The-Greatest-Showman": greatestShowmanPoster,
+  "Mufasa-The-Lion-King": mufasaPoster,
   "superman": supermanPoster,
-
   "ballerina": ballerinaPoster,
-
   "f1": f1Poster,
-
-  "fantastic-4-first-steps":
-    fantastic4Poster,
-
-  "lilo-and-stitch":
-    liloAndStitchPoster,
+  "fantastic-4-first-steps": fantastic4Poster,
+  "lilo-and-stitch": liloAndStitchPoster,
 };
 
 
@@ -114,35 +75,17 @@ const BookingPage = () => {
     time,
   } = useParams();
 
-
   const navigate = useNavigate();
 
-
   // CURRENT BOOKING STEP
-  const [
-    currentSection,
-    setCurrentSection,
-  ] = useState(1);
-
+  const [currentSection, setCurrentSection] = useState(1);
 
   // MOVIE
-  const [
-    movie,
-    setMovie,
-  ] = useState(null);
-
-  const [
-    loadingMovie,
-    setLoadingMovie,
-  ] = useState(true);
-
+  const [movie, setMovie] = useState(null);
+  const [loadingMovie, setLoadingMovie] = useState(true);
 
   // SHOWTIME
-  const [
-    showtime,
-    setShowtime,
-  ] = useState(null);
-
+  const [showtime, setShowtime] = useState(null);
 
   // SEATS
   const [
@@ -150,23 +93,11 @@ const BookingPage = () => {
     setSeats,
   ] = useState([]);
 
-  const [
-    selectedSeatIds,
-    setSelectedSeatIds,
-  ] = useState([]);
-
-  const [
-    loadingSeats,
-    setLoadingSeats,
-  ] = useState(true);
-
+  const [selectedSeatIds, setSelectedSeatIds] = useState([]);
+  const [loadingSeats, setLoadingSeats] = useState(true);
 
   // TICKETS
-  const [
-    totalTicketsSelected,
-    setTotalTicketsSelected,
-  ] = useState(0);
-
+  const [totalTicketsSelected, setTotalTicketsSelected] = useState(0);
 
   // ERROR
   const [
@@ -176,9 +107,7 @@ const BookingPage = () => {
 
 
   const [bookingLoading, setBookingLoading] = useState(false);
-
   const [bookingError, setBookingError] = useState("");
-
 
 
   // =========================================================
@@ -210,18 +139,11 @@ const BookingPage = () => {
         setMovie(data.movie);
 
       } catch (err) {
-
-        console.error(
-          "Failed to fetch movie:",
-          err
-        );
-
+        console.error("Failed to fetch movie:", err);
         setError(err.message);
 
       } finally {
-
         setLoadingMovie(false);
-
       }
     };
 
@@ -239,10 +161,8 @@ const BookingPage = () => {
   // =========================================================
 
   useEffect(() => {
-
     const fetchSeats = async () => {
       try {
-
         setLoadingSeats(true);
         setError("");
 
@@ -250,8 +170,7 @@ const BookingPage = () => {
           `http://localhost:5000/showtimes/${showtimeId}/seats`
         );
 
-        const data =
-          await response.json();
+        const data = await response.json();
 
         if (!response.ok) {
           throw new Error(
@@ -260,21 +179,12 @@ const BookingPage = () => {
           );
         }
 
-        setShowtime(
-          data.showtime
-        );
-
-        setSeats(
-          data.seats
-        );
+        setShowtime(data.showtime);
+        setSeats(data.seats);
 
       } catch (err) {
 
-        console.error(
-          "Failed to fetch seats:",
-          err
-        );
-
+        console.error("Failed to fetch seats:", err);
         setError(err.message);
 
       } finally {
@@ -708,14 +618,10 @@ const BookingPage = () => {
 
       </div>
 
-
-
       {/* CURRENT BOOKING SECTION */}
       <div className="booking-section-content">
         {renderSection()}
       </div>
-
-
 
       {/* SELECTED SEAT COUNT */}
       <p className="selected-seats-info">
@@ -727,7 +633,6 @@ const BookingPage = () => {
 
       {/* BACK / NEXT BUTTONS */}
       <div className="booking-section-navigation-buttons">
-
         <button
           className="booking-section-navigation-back"
 
@@ -775,11 +680,7 @@ const BookingPage = () => {
               : "CONFIRM PAYMENT"
             : "NEXT"}
         </button>
-
-
       </div>
-
-
     </div>
   );
 };

@@ -36,43 +36,25 @@ const classificationMap = {
 };
 
 const movieDataPoster = {
-    "Sinners": {
-      poster: sinnersPoster,      
-    },
+    "Sinners": {poster: sinnersPoster},
+    
+    "Spiderman-Across-the-Spider-Verse": {poster: spidermanPoster},
 
-    "Spiderman-Across-the-Spider-Verse": {
-      poster: spidermanPoster,
-    },
-    "Better-Man": {
-      poster: betterManPoster,
-    },
-    "Mufasa-The-Lion-King": {
-      poster: mufasaPoster,
-    },
+    "Better-Man": {poster: betterManPoster},
 
-    "The-Greatest-Showman": {
-      poster: greatestShowmanPoster,
-    },
+    "Mufasa-The-Lion-King": {poster: mufasaPoster},
 
-    "superman": {
-      poster: supermanPoster,
-    },
+    "The-Greatest-Showman": {poster: greatestShowmanPoster},
 
-    "ballerina": {
-      poster: ballerinaPoster,
-    },
+    "superman": {poster: supermanPoster},
 
-    "fantastic-4-first-steps": {
-      poster: fantastic4Poster,
-    },
+    "ballerina": {poster: ballerinaPoster},
 
-    "f1": {
-      poster: f1Poster,
-    },
+    "fantastic-4-first-steps": {poster: fantastic4Poster},
 
-    "lilo-and-stitch": {
-      poster: liloAndStitchPoster,
-    }
+    "f1": {poster: f1Poster},
+
+    "lilo-and-stitch": {poster: liloAndStitchPoster}
 }
 
 const MovieInformationPage = () => {

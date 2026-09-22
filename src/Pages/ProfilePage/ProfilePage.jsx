@@ -20,7 +20,6 @@ import WatchlistCard from "../../Components/WatchlistCard/WatchlistCard.jsx";
 
 import "./ProfilePage.css";
 
-
 function ProfilePage() {
 
   const {
@@ -31,34 +30,18 @@ function ProfilePage() {
 
   const navigate = useNavigate();
 
-  const [
-    activeTab,
-    setActiveTab,
-  ] = useState("orders");
+  const [activeTab, setActiveTab] = useState("orders");
+  const [bookings, setBookings] = useState([]);
+  const [bookingsLoading, setBookingsLoading] = useState(false);
 
-  const [
-    bookings,
-    setBookings,
-  ] = useState([]);
-
-  const [
-    bookingsLoading,
-    setBookingsLoading,
-  ] = useState(false);
-
-  const [
-    bookingsError,
-    setBookingsError,
-  ] = useState("");
+  const [bookingsError, setBookingsError] = useState("");
 
   // =========================================================
   // Watchlist State
   // =========================================================
 
   const [watchlist, setWatchlist] = useState([]);
-
   const [watchlistLoading, setWatchlistLoading] = useState(false);
-
   const [watchlistError, setWatchlistError] = useState("");
 
   

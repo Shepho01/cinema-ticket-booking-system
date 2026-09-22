@@ -10,26 +10,15 @@ import "./SignUpPage.css";
 function SignUpPage() {
   const navigate = useNavigate();
 
-  const [firstName, setFirstName] =
-    useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [lastName, setLastName] =
-    useState("");
+  const [error, setError] = useState("");
 
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const [confirmPassword, setConfirmPassword] =
-    useState("");
-
-  const [error, setError] =
-    useState("");
-
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   const handleSubmit = async (e) => {
