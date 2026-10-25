@@ -16,6 +16,32 @@ A full-stack cinema booking application for browsing films, choosing a screening
 
 **Status:** Local development project. Booking creation is implemented; payment-provider integration is not. The payment screen currently contains placeholder provider names.
 
+## Screenshots
+
+### Home page
+
+![Sheph Cinemas home page](docs/screenshots/home-page.png)
+
+### Movies
+
+![Movies page](docs/screenshots/movies-page.png)
+
+### Seat selection
+
+![Seat selection](docs/screenshots/seat-selection.png)
+
+### AI chatbot
+
+![Chatbot](docs/screenshots/chatbot.png)
+
+### Profile orders
+
+![Profile orders](docs/screenshots/profile-orders.png)
+
+### Profile watchlist
+
+![Profile watchlist](docs/screenshots/profile-watchlist.png)
+
 ## Technology
 
 | Layer              | Implementation                                        |
