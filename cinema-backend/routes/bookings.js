@@ -89,7 +89,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET BOOKING BY ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", requireAuth, async (req, res) => {
   try {
     const bookingId = Number(req.params.id);
 
@@ -152,6 +152,7 @@ router.get("/:id", async (req, res) => {
         ON s.id = bs.seat_id
 
       WHERE b.id = $1
+        AND b.member_id = $2
 
       GROUP BY
         b.id,
@@ -169,7 +170,7 @@ router.get("/:id", async (req, res) => {
         b.total_price,
         b.created_at
       `,
-      [bookingId]
+      [bookingId, req.memberId]
     );
 
     if (rows.length === 0) {
@@ -191,13 +192,21 @@ router.get("/:id", async (req, res) => {
 });
 
 // GET ALL BOOKINGS FOR A SPECIFIC MEMBER
-router.get("/member/:memberId", async (req, res) => {
+router.get("/member/:memberId", requireAuth, async (req, res) => {
   try {
     const memberId = Number(req.params.memberId);
 
-    if (!Number.isInteger(memberId)) {
+    // Validate memberId
+    if (!Number.isInteger(memberId) || memberId <= 0) {
       return res.status(400).json({
-        error: "Member ID must be a valid integer",
+        error: "Member ID must be a valid positive integer",
+      });
+    }
+
+    // check authorisation: only allow the logged-in member to access their own bookings
+    if (String(req.memberId) !== String(memberId)) {
+      return res.status(403).json({
+        error: "You cannot access another member's bookings",
       });
     }
 
