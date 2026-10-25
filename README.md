@@ -14,17 +14,17 @@ A full-stack cinema booking application for browsing films, choosing a screening
 - Add and remove movies from a personal watchlist.
 - Request movie recommendations: the backend supplies the currently showing catalogue to Gemini and prompts it to recommend up to three matches.
 
-**Status:** local development project. Booking creation is implemented; payment-provider integration is not. The payment screen currently contains placeholder provider names.
+**Status:** Local development project. Booking creation is implemented; payment-provider integration is not. The payment screen currently contains placeholder provider names.
 
 ## Technology
 
-| Layer | Implementation |
-| --- | --- |
-| Frontend | React 19, JavaScript/JSX, CSS, React Router, Vite |
-| API | Node.js, Express 5 |
-| Database | PostgreSQL, accessed through the `pg` connection pool |
-| Authentication | Argon2id, JSON Web Tokens, cookie-parser |
-| AI recommendations | Google Gemini via `@google/genai` |
+| Layer              | Implementation                                        |
+| ------------------ | ----------------------------------------------------- |
+| Frontend           | React 19, JavaScript/JSX, CSS, React Router, Vite     |
+| API                | Node.js, Express 5                                    |
+| Database           | PostgreSQL, accessed through the `pg` connection pool |
+| Authentication     | Argon2id, JSON Web Tokens, cookie-parser              |
+| AI recommendations | Google Gemini via `@google/genai`                     |
 
 ## Architecture
 
@@ -64,6 +64,7 @@ erDiagram
         text email
         text password_hash
     }
+
     MOVIES {
         int id PK
         text name
@@ -72,10 +73,12 @@ erDiagram
         text overview
         text release_status
     }
+
     SCREENS {
         int id PK
         text name
     }
+
     SEATS {
         int id PK
         int screen_id FK
@@ -83,6 +86,7 @@ erDiagram
         int seat_number
         text seat_label
     }
+
     SHOWTIMES {
         int id PK
         int movie_id FK
@@ -91,6 +95,7 @@ erDiagram
         timestamp ends_at
         numeric price
     }
+
     BOOKINGS {
         int id PK
         int member_id FK
@@ -99,12 +104,14 @@ erDiagram
         numeric total_price
         timestamp created_at
     }
+
     BOOKING_SEATS {
         int id PK
         int booking_id FK
         int showtime_id FK
         int seat_id FK
     }
+
     WATCHLIST {
         int id PK
         int member_id FK
@@ -129,15 +136,15 @@ sequenceDiagram
     participant User as React interface
     participant API as Express API
     participant DB as PostgreSQL
-    User->>API: GET /showtimes/:showtimeId/seats
+    User->>API: GET /showtimes/{showtimeId}/seats
     API->>DB: Load screening and seat availability
     DB-->>API: Screening and seats
     API-->>User: Available and booked seats
     User->>API: POST /bookings with auth cookie and seat IDs
     API->>API: Verify JWT and validate request
-    API->>DB: BEGIN; validate screening, seats and availability
+    API->>DB: BEGIN, then validate screening, seats and availability
     alt Selection is valid and available
-        API->>DB: Insert booking and booking_seats; COMMIT
+        API->>DB: Insert booking and booking_seats, then COMMIT
         API-->>User: 201 booking confirmation
     else Invalid or already booked selection
         API->>DB: ROLLBACK
@@ -155,7 +162,7 @@ The API rejects duplicate seat IDs, checks that seats belong to the screening's 
 - A running PostgreSQL database with the application's schema and seed data.
 - A Gemini API key for the recommendation feature.
 
-**Database setup dependency:** this repository snapshot does not contain migrations, a schema dump, seed SQL or Docker Compose configuration. Restore the existing development database before running database-backed features. The ERD is documentation, not an executable schema.
+**Database setup dependency:** This repository snapshot does not contain migrations, a schema dump, seed SQL or Docker Compose configuration. Restore the existing development database before running database-backed features. The ERD is documentation, not an executable schema.
 
 ### 1. Install dependencies
 
@@ -203,36 +210,36 @@ Open `http://localhost:5173`. Frontend requests currently use `http://localhost:
 
 ## Main API routes
 
-| Method | Route | Purpose |
-| --- | --- | --- |
-| GET | `/movies?status=now_showing` | List movies, optionally filtered by release status |
-| GET | `/movies/:slug` | Get a movie |
-| GET | `/movies/:slug/showtimes` | List screenings, formatted for Sydney time |
-| GET | `/showtimes/:showtimeId/seats` | Get seats and availability |
-| POST | `/auth/register` | Register a member |
-| POST | `/auth/login` | Set authentication cookie |
-| GET | `/auth/me` | Get the current member |
-| POST | `/auth/logout` | Clear authentication cookie |
-| POST | `/bookings` | Create a booking; authentication required |
-| GET | `/bookings/member/:memberId` | Retrieve member booking history |
-| GET | `/bookings/:id` | Retrieve a booking |
-| GET | `/watchlist` | Get the signed-in member's watchlist |
-| POST / DELETE | `/watchlist/:movieId` | Add or remove a saved movie |
-| POST | `/ai/recommend` | Request catalogue-based recommendations |
+| Method        | Route                          | Purpose                                            |
+| ------------- | ------------------------------ | -------------------------------------------------- |
+| GET           | `/movies?status=now_showing`   | List movies, optionally filtered by release status |
+| GET           | `/movies/:slug`                | Get a movie                                        |
+| GET           | `/movies/:slug/showtimes`      | List screenings, formatted for Sydney time         |
+| GET           | `/showtimes/:showtimeId/seats` | Get seats and availability                         |
+| POST          | `/auth/register`               | Register a member                                  |
+| POST          | `/auth/login`                  | Set authentication cookie                          |
+| GET           | `/auth/me`                     | Get the current member                             |
+| POST          | `/auth/logout`                 | Clear authentication cookie                        |
+| POST          | `/bookings`                    | Create a booking; authentication required          |
+| GET           | `/bookings/member/:memberId`   | Retrieve member booking history                    |
+| GET           | `/bookings/:id`                | Retrieve a booking                                 |
+| GET           | `/watchlist`                   | Get the signed-in member's watchlist               |
+| POST / DELETE | `/watchlist/:movieId`          | Add or remove a saved movie                        |
+| POST          | `/ai/recommend`                | Request catalogue-based recommendations            |
 
 The current booking read routes do not enforce authentication or ownership checks. They need access controls before public deployment.
 
 ## Code guide
 
-| Path | Responsibility |
-| --- | --- |
-| `src/Pages/` | Movie browsing, booking, authentication, profile and AI pages |
-| `src/Components/` | Seat selection, ticket selection, navigation and cards |
-| `src/context/AuthContext.jsx` | Frontend authentication state |
-| `cinema-backend/index.js` | Express configuration and route mounting |
-| `cinema-backend/routes/` | SQL queries and API handlers |
-| `cinema-backend/middleware/requireAuth.js` | JWT authentication middleware |
-| `cinema-backend/db/pool.js` | PostgreSQL connection pool |
+| Path                                       | Responsibility                                                |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| `src/Pages/`                               | Movie browsing, booking, authentication, profile and AI pages |
+| `src/Components/`                          | Seat selection, ticket selection, navigation and cards        |
+| `src/context/AuthContext.jsx`              | Frontend authentication state                                 |
+| `cinema-backend/index.js`                  | Express configuration and route mounting                      |
+| `cinema-backend/routes/`                   | SQL queries and API handlers                                  |
+| `cinema-backend/middleware/requireAuth.js` | JWT authentication middleware                                 |
+| `cinema-backend/db/pool.js`                | PostgreSQL connection pool                                    |
 
 ## Checks and next steps
 
