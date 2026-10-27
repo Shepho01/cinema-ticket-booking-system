@@ -397,7 +397,7 @@ router.post("/", requireAuth, async (req, res) => {
 
       WHERE bs.showtime_id = $1
         AND bs.seat_id = ANY($2::int[])
-        AND b.status = 'confirmed'
+        AND bs.is_active = TRUE
       `,
       [
         showtimeId,
@@ -482,12 +482,20 @@ router.post("/", requireAuth, async (req, res) => {
   } catch (err) {
     await client.query("ROLLBACK");
 
-    console.error(
-      "Failed to create booking:",
-      err
-    );
+    // Handle seat reservation conflicts
+    if (
+      err.code === "23505" &&
+      err.constraint === "unique_active_showtime_seat"
+    ) {
+      return res.status(409).json({
+        error: "One or more selected seats are no longer available",
+      });
+    }
 
-    res.status(500).json({
+    // Handle unexpected errors
+    console.error("Failed to create booking:", err);
+
+    return res.status(500).json({
       error: "Failed to create booking",
     });
   } finally {
@@ -632,90 +640,103 @@ router.get(
   }
 );
 
+
 // CANCEL A BOOKING
-router.patch(
-  "/:id/cancel",
-  requireAuth,
-  async (req, res) => {
-    try {
-      const bookingId = Number(req.params.id);
+router.patch("/:id/cancel", requireAuth, async (req, res) => {
+  const bookingId = Number(req.params.id);
 
-      if (!Number.isInteger(bookingId)) {
-        return res.status(400).json({
-          error: "Booking ID must be a valid integer",
-        });
-      }
+  if (!Number.isInteger(bookingId)) {
+    return res.status(400).json({
+      error: "Booking ID must be a valid integer",
+    });
+  }
 
-      // Check that the booking exists
-      // AND belongs to the logged-in member
-      const bookingResult = await pool.query(
-        `
-        SELECT
-          id,
-          member_id AS "memberId",
-          status
-        FROM bookings
-        WHERE id = $1
-          AND member_id = $2
-        `,
-        [
-          bookingId,
-          req.memberId,
-        ]
-      );
+  const client = await pool.connect();
 
-      if (bookingResult.rows.length === 0) {
-        return res.status(404).json({
-          error: "Booking not found",
-        });
-      }
+  try {
+    await client.query("BEGIN");
 
-      const booking = bookingResult.rows[0];
+    // Check that the booking exists
+    // AND belongs to the logged-in member
+    const bookingResult = await client.query(
+      `
+      SELECT
+        id,
+        member_id AS "memberId",
+        status
+      FROM bookings
+      WHERE id = $1
+        AND member_id = $2
+      FOR UPDATE
+      `,
+      [bookingId, req.memberId]
+    );
 
-      // Prevent cancelling the same booking twice
-      if (booking.status === "cancelled") {
-        return res.status(409).json({
-          error: "Booking is already cancelled",
-        });
-      }
+    if (bookingResult.rows.length === 0) {
+      await client.query("ROLLBACK");
 
-      // Update the booking status
-      const { rows } = await pool.query(
-        `
-        UPDATE bookings
-
-        SET status = 'cancelled'
-
-        WHERE id = $1
-          AND member_id = $2
-
-        RETURNING
-          id AS "bookingId",
-          status
-        `,
-        [
-          bookingId,
-          req.memberId,
-        ]
-      );
-
-      res.json({
-        message: "Booking cancelled successfully",
-        booking: rows[0],
-      });
-
-    } catch (err) {
-      console.error(
-        "Failed to cancel booking:",
-        err
-      );
-
-      res.status(500).json({
-        error: "Failed to cancel booking",
+      return res.status(404).json({
+        error: "Booking not found",
       });
     }
+
+    const booking = bookingResult.rows[0];
+
+    // Prevent cancelling the same booking twice
+    if (booking.status === "cancelled") {
+      await client.query("ROLLBACK");
+
+      return res.status(409).json({
+        error: "Booking is already cancelled",
+      });
+    }
+
+    // Update the booking status
+    const { rows } = await client.query(
+      `
+      UPDATE bookings
+      SET status = 'cancelled'
+      WHERE id = $1
+        AND member_id = $2
+      RETURNING
+        id AS "bookingId",
+        status
+      `,
+      [bookingId, req.memberId]
+    );
+
+    // Release the seats associated with this booking
+    await client.query(
+      `
+      UPDATE booking_seats
+      SET is_active = FALSE
+      WHERE booking_id = $1
+      `,
+      [bookingId]
+    );
+
+    // Save both changes together
+    await client.query("COMMIT");
+
+    res.json({
+      message: "Booking cancelled successfully",
+      booking: rows[0],
+    });
+
+  } catch (err) {
+    await client.query("ROLLBACK");
+
+    console.error("Failed to cancel booking:", err);
+
+    res.status(500).json({
+      error: "Failed to cancel booking",
+    });
+
+  } finally {
+    client.release();
   }
-);
+});
+
 
 
 
