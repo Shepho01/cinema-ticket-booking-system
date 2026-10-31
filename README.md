@@ -266,14 +266,3 @@ The current booking read routes do not enforce authentication or ownership check
 | `cinema-backend/routes/`                   | SQL queries and API handlers                                  |
 | `cinema-backend/middleware/requireAuth.js` | JWT authentication middleware                                 |
 | `cinema-backend/db/pool.js`                | PostgreSQL connection pool                                    |
-
-## Checks and next steps
-
-The root package provides `npm run build` and `npm run lint`. The backend's `npm test` is a placeholder, not an automated test suite.
-
-- Commit schema migrations and repeatable seed data; confirm this ERD against them.
-- Add screenshots of the movie catalogue, seat selection and member profile.
-- Protect booking reads with authentication and ownership/role checks.
-- Verify database constraints and test competing bookings for the same seat.
-- Add API and integration tests, then measure performance with load tests.
-- Move frontend API addresses into configuration and integrate a payment provider if needed.
